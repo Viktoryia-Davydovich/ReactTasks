@@ -5,6 +5,9 @@ class Counter extends Component{
         super(props);
 
         this.state = {count: 0};
+        this.increment = this.increment.bind(this)
+        this.decrement = this.decrement.bind(this)
+        this.reset = this.reset.bind(this)
     }
 
     increment(){
@@ -19,7 +22,15 @@ class Counter extends Component{
         }))
     }
 
+    reset(){
+        this.setState(state => ({
+            count:0
+        }))
+    }
+
     render(){
         return <Counter {...props}/>
     }
 }
+
+export default Counter;
