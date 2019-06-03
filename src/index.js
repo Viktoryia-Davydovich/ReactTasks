@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
-import CounterButtons from './views/Counter/index'
+import Counter from './views/Counter/index'
 
 ReactDOM.render(
-    <CounterButtons />,
+    <Counter />,
     document.getElementById('root')
   );
