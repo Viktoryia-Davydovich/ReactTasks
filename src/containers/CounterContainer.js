@@ -1,43 +1,46 @@
 import React, { Component } from 'react';
+import Counter from '../views/Counter';
+
 
 class CounterContainer extends Component{
     constructor(props){
         super(props);
 
-        this.state = {count: 0};
-        
-        this.increment = this.increment.bind(this)
-        this.decrement = this.decrement.bind(this)
-        this.reset = this.reset.bind(this)
+        this.state = {
+            count: 0,
+        };
     }
 
-    increment(){
+    increment = () => {
         this.setState(state => ({
-            count: state.count++
+            count: this.state.count + 1
         }))
     }
 
-    decrement(){
+    decrement = () => {
         this.setState(state => ({
-            count: state.count--
+            count: this.state.count - 1
         }))
     }
 
-    reset(){
+    reset = () => {
         this.setState(state => ({
             count:0
         }))
     }
 
     render(){
+
         const props = {
             increment: this.increment,
             decrement: this.decrement,
             reset: this.reset,
-            counter: this.state.count,
+            count: this.state.count,
         }
 
-        return <CounterContainer {...props}/>
+        return (
+            <Counter {...props}/>
+        )
     }
 }
 

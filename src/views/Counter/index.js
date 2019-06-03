@@ -1,36 +1,37 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TypoGraphy from '@material-ui/core/Typography';
-import ButtonStyles from './styles'
-import Counter from '../../containers/CounterContainer'
+import ButtonStyles from './styles';
 
-const Counter = ({counter, increment, decrement, reset}) => (
-  <div>
+const Counter = ({count, increment, decrement, reset}) => {
+  return(
+    <div>
     <div>
       <Button style={ButtonStyles.crementBtnStyle} onClick={increment}>
-          increment
+        increment
       </Button>
       <Button style={ButtonStyles.crementBtnStyle} onClick={decrement}>
-          decrement
+        decrement
       </Button>
       <Button style={ButtonStyles.resetBtnStyle} onClick={reset}>
-          reset
+        reset
       </Button>
     </div>
     <div>
       <TypoGraphy style={ButtonStyles.typographyStyle}>
-          {counter}
+        {count}
       </TypoGraphy>
     </div>
   </div>
-)
+  )
+};
 
 Counter.propTypes = {
-  counter: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
 }
 
-export default (Counter);
+export default Counter;
