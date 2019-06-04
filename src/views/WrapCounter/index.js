@@ -6,6 +6,12 @@ import wrapCounterBtnStyles from './styles'
 import CounterContainer from '../../containers/CounterContainer'
 
 const WrapCounter = ({counters_count, counters, add_counter, delete_counter, reset_counters}) => {
+      
+  const elem = counters.map(({ key }) => {
+    return (
+        <CounterContainer key={key}/>
+    );
+  });
 
     return(
         <div>
@@ -18,9 +24,9 @@ const WrapCounter = ({counters_count, counters, add_counter, delete_counter, res
             <Button style={wrapCounterBtnStyles.delBtnStyle} onClick={reset_counters}>
                 reset all
             </Button>
-        {Array.from(Array(counters_count), (e) => (<CounterContainer key = {counters.key}/>))}
+        {Array.from(Array(counters_count), () => (elem))}
     </div>
-    )
+    );
 }
 
 WrapCounter.propTypes = {

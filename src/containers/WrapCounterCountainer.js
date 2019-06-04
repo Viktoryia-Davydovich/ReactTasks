@@ -18,40 +18,33 @@ class WrapCounterContainer extends Component{
     }
 
     add_counter = () => {
-        const newCounters = [...this.state.counters];
 
         this.setState({
             counters_count: this.state.counters_count + 1,
-            counters: [...newCounters, { key: this.state.number + 1 }]
-        })
+            counters: [{ key: this.state.counters_count + 1 }]
+        });
     }
 
-
-
     delete_counter = () => {
-        const newCounters = [...this.state.counters];
 
-        if (newCounters.length > 1){
+        if (this.state.counters_count > 1){
             
         this.setState({
             counters_count: this.state.counters_count - 1,
-            counters: newCounters.slice(0, -1)
-        })
+            counters: [{ key: this.state.counters_count - 1 }]
+        });
+       
         }
     }
 
-
     reset_counters = () => 
     {
-        const newCounters = [...this.state.counters];
 
         this.setState({
             counters_count: 1,
-            counters: newCounters.slice(0,1)
-        })
+            counters: [{ key: 1 }]
+        });
     }
-
-
 
     render(){
         const props = {
@@ -68,23 +61,27 @@ class WrapCounterContainer extends Component{
     }
 
     componentDidMount(){
-        console.log("component did mount");
+        console.log("component did mount - WrapCounterContainer");
     }
 
     shouldComponentUpdate() {
-        console.log('component should update');
+        console.log("component should update - WrapCounterContainer");
     
         return true;
     }
 
     componentWillReceiveProps() {
-        console.log('ccomponent will receive props');
+        console.log("component will receive props - WrapCounterContainer");
     
         return true;
     }
 
+    componentDidUpdate() {
+        console.log("component did update - WrapCounterContainer");
+    }
+
     componentWillUnmount(){
-        console.log("component will unmount");
+        console.log("component will unmount - WrapCounterContainer");
     }
 }
 

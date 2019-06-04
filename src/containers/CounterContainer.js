@@ -53,6 +53,7 @@ class CounterContainer extends Component{
 
     shouldComponentUpdate() {
         console.log('should component update');
+        return true;
     }
 
     componentWillReceiveProps() {
