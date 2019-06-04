@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/ReactTasks/static/js/main.099d33bd.chunk.js",
+    "main.js.map": "/ReactTasks/static/js/main.099d33bd.chunk.js.map",
+    "runtime~main.js": "/ReactTasks/static/js/runtime~main.d2fb6a01.js",
+    "runtime~main.js.map": "/ReactTasks/static/js/runtime~main.d2fb6a01.js.map",
+    "static/js/2.febc08c5.chunk.js": "/ReactTasks/static/js/2.febc08c5.chunk.js",
+    "static/js/2.febc08c5.chunk.js.map": "/ReactTasks/static/js/2.febc08c5.chunk.js.map",
+    "index.html": "/ReactTasks/index.html",
+    "precache-manifest.5f1dc7d0664229b341e93df39e61e9ec.js": "/ReactTasks/precache-manifest.5f1dc7d0664229b341e93df39e61e9ec.js",
+    "service-worker.js": "/ReactTasks/service-worker.js"
+  }
+}
