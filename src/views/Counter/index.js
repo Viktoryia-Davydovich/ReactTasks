@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TypoGraphy from '@material-ui/core/Typography';
+
 import ButtonStyles from './styles';
 
 const Counter = ({count, increment, decrement, reset}) => {
   return(
     <div>
     <div>
-      <Button style={ButtonStyles.crementBtnStyle} onClick={increment}>
+      <Button style={ButtonStyles.incrementBtnStyle} onClick={increment}>
         increment
       </Button>
-      <Button style={ButtonStyles.crementBtnStyle} onClick={decrement}>
+      <Button style={ButtonStyles.incrementBtnStyle} onClick={decrement}>
         decrement
       </Button>
       <Button style={ButtonStyles.resetBtnStyle} onClick={reset}>
