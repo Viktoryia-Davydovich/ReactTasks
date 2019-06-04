@@ -5,11 +5,11 @@ import React from 'react';
 import wrapCounterBtnStyles from './styles'
 import CounterContainer from '../../containers/CounterContainer'
 
-const WrapCounter = ({counters_count, counters, add_counter, delete_counter, reset_counters}) => {
+const WrapCounter = ({label, counters_count, counters, add_counter, delete_counter, reset_counters}) => {
       
   const elem = counters.map(({ key }) => {
     return (
-        <CounterContainer key={key}/>
+        <CounterContainer key={key} label={label}/>
     );
   });
 

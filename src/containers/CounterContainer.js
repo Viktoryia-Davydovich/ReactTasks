@@ -15,19 +15,19 @@ class CounterContainer extends Component{
     isCountEven = () => (this.state.count %  2 === 0);
 
     increment = () => {
-        this.setState(state => ({
+        this.setState(() => ({
             count: this.state.count + 1
         }))
     }
 
     decrement = () => {
-        this.setState(state => ({
+        this.setState(() => ({
             count: this.state.count - 1
         }))
     }
 
     reset = () => {
-        this.setState(state => ({
+        this.setState(() => ({
             count:0
         }))
     }
@@ -51,13 +51,22 @@ class CounterContainer extends Component{
         console.log('component did mount');
     }
 
-    shouldComponentUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {
         console.log('should component update');
-        return true;
+
+        return this.state.count !== nextState.count;
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
         console.log('component will receive props');
+
+        if(nextProps.action == 'add' && this.isCountEven()) {
+            this.setState({ count: this.state.count + 1 });
+          }
+      
+          if(nextProps.label == 'delete'  && !this.isCountEven()) {
+            this.setState({ count: this.state.count - 1 });
+          }
     }
 
     componentDidUpdate() {
