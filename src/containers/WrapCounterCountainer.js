@@ -40,6 +40,7 @@ class WrapCounterContainer extends Component{
     render(){
         const props = {
             counters_count: this.state.counters_count,
+            counters: this.state.counters,
             add_counter: this.add_counter,
             delete_counter: this.delete_counter,
             reset_counters: this.reset_counters,

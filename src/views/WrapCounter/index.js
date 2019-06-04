@@ -5,21 +5,23 @@ import React from 'react';
 import wrapCounterBtnStyles from './styles'
 import CounterContainer from '../../containers/CounterContainer'
 
-const WrapCounter = ({counters_count, add_counter, delete_counter, reset_counters}) => (
+const WrapCounter = ({counters_count, counters, add_counter, delete_counter, reset_counters}) => {
 
-    <div>
-        <Button style={wrapCounterBtnStyles.btnStyle} onClick={add_counter}>
-            new counter
-        </Button>
-        <Button style={wrapCounterBtnStyles.btnStyle} onClick={delete_counter}>
-            delete last
-        </Button>
-        <Button style={wrapCounterBtnStyles.delBtnStyle} onClick={reset_counters}>
-            reset all
-        </Button>
-        {Array.from(Array(counters_count), (e) => (<CounterContainer/>))}
+    return(
+        <div>
+            <Button style={wrapCounterBtnStyles.btnStyle} onClick={add_counter}>
+                new counter
+            </Button>
+            <Button style={wrapCounterBtnStyles.btnStyle} onClick={delete_counter}>
+                delete last
+            </Button>
+            <Button style={wrapCounterBtnStyles.delBtnStyle} onClick={reset_counters}>
+                reset all
+            </Button>
+        {Array.from(Array(counters_count), (e, i) => (<CounterContainer key = {counters[i].key}/>))}
     </div>
-)
+    )
+}
 
 WrapCounter.propTypes = {
     add_counter: PropTypes.func.isRequired,
