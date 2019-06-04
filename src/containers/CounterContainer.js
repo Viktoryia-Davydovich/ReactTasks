@@ -12,6 +12,8 @@ class CounterContainer extends Component{
         };
     }
 
+    isCountEven = () => (this.state.count %  2 === 0);
+
     increment = () => {
         this.setState(state => ({
             count: this.state.count + 1
@@ -43,6 +45,28 @@ class CounterContainer extends Component{
             <Counter {...props}/>
         )
     }
+
+
+    componentDidMount() {
+        console.log('component did mount');
+    }
+
+    shouldComponentUpdate() {
+        console.log('should component update');
+    }
+
+    componentWillReceiveProps() {
+        console.log('component will receive props');
+    }
+
+    componentDidUpdate() {
+        console.log('component did update');
+    }
+
+    componentWillUnmount() {
+        console.log('component will unmount');
+    }
+    
 }
 
 export default CounterContainer;
