@@ -17,25 +17,41 @@ class WrapCounterContainer extends Component{
         }
     }
 
-    add_counter = () => (
+    add_counter = () => {
+        const newCounters = [...this.state.counters];
+
         this.setState({
             counters_count: this.state.counters_count + 1,
-            counters: [{key: this.state.counters_count + 1}]
+            counters: [...newCounters, { key: this.state.number + 1 }]
         })
-    )
+    }
 
-    delete_counter = () => (
+
+
+    delete_counter = () => {
+        const newCounters = [...this.state.counters];
+
+        if (newCounters.length > 1){
+            
         this.setState({
             counters_count: this.state.counters_count - 1,
-            counters: [{key: this.state.counters_count - 1}]
+            counters: newCounters.slice(0, -1)
         })
-    )
+        }
+    }
 
-    reset_counters = () => (
+
+    reset_counters = () => 
+    {
+        const newCounters = [...this.state.counters];
+
         this.setState({
-            counters_count: 1
+            counters_count: 1,
+            counters: newCounters.slice(0,1)
         })
-    )
+    }
+
+
 
     render(){
         const props = {
@@ -53,6 +69,18 @@ class WrapCounterContainer extends Component{
 
     componentDidMount(){
         console.log("component did mount");
+    }
+
+    shouldComponentUpdate() {
+        console.log('component should update');
+    
+        return true;
+    }
+
+    componentWillReceiveProps() {
+        console.log('ccomponent will receive props');
+    
+        return true;
     }
 
     componentWillUnmount(){

@@ -18,7 +18,7 @@ const WrapCounter = ({counters_count, counters, add_counter, delete_counter, res
             <Button style={wrapCounterBtnStyles.delBtnStyle} onClick={reset_counters}>
                 reset all
             </Button>
-        {Array.from(Array(counters_count), (e, i) => (<CounterContainer key = {counters[i].key}/>))}
+        {Array.from(Array(counters_count), (e) => (<CounterContainer key = {counters.key}/>))}
     </div>
     )
 }
