@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import CounterContainer from './containers/CounterContainer'
+import WrapCounterCountainer from './containers/WrapCounterCountainer'
 
 ReactDOM.render(
-    <CounterContainer />,
+    <WrapCounterCountainer />,
     document.getElementById('root')
   );
