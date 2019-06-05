@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Routing from '../views/Routing/index';
+import Routing from '../views/Routing/index'
 
 
 class RoutingContainer extends Component{
@@ -10,7 +10,6 @@ class RoutingContainer extends Component{
             <Routing/>
         )
     }
-
 }
 
 export default RoutingContainer;
