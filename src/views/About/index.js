@@ -10,7 +10,7 @@ const About = () => (
             About us
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            This is us, this is who we are.
+            This is some information abou us.
           </Typography>
         </CardContent>
     </Card>
