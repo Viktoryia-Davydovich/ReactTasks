@@ -11,7 +11,7 @@ class WrapCounterContainer extends Component{
             counters_count: 1,
             counters: [
                 {
-                    key: 1
+                    key: 1,
                 }
             ],
             label: ''
@@ -19,21 +19,24 @@ class WrapCounterContainer extends Component{
     }
 
     add_counter = () => {
+        const existingsCounters = this.state.counters.slice(0);
 
         this.setState({
             counters_count: this.state.counters_count + 1,
-            counters: [{ key: this.state.counters + 1 }],
+            counters: [...existingsCounters, { key: this.state.counters_count + 1 }],
             label: 'add'
         });
     }
 
     delete_counter = () => {
 
+        const existingsCounters = this.state.counters.slice(0);
+
         if (this.state.counters_count > 1){
             
         this.setState({
             counters_count: this.state.counters_count - 1,
-            counters: [{ key: this.state.counters - 1 }],
+            counters: existingsCounters.slice(0, -1),
             label: 'delete'
         });
        
@@ -42,7 +45,6 @@ class WrapCounterContainer extends Component{
 
     reset_counters = () => 
     {
-
         this.setState({
             counters_count: 1,
             counters: [{ key: 1 }],

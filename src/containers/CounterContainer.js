@@ -60,7 +60,7 @@ class CounterContainer extends Component{
     componentWillReceiveProps(nextProps) {
         console.log('component will receive props');
 
-        if(nextProps.action == 'add' && this.isCountEven()) {
+        if(nextProps.label == 'add' && this.isCountEven()) {
             this.setState({ count: this.state.count + 1 });
           }
       
