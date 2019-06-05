@@ -10,20 +10,22 @@ import MenuContainer from '../../containers/MenuContainer'
 const Routing = () => (
   <div>
     <Router>
-    <Switch>
-      <Route path="/404" component={NotFoundContainer} />
-      <Route>
-        <div>
-        <MenuContainer/>
+      <Switch>
+        <Route path="/404" component={NotFoundContainer} />
+        <Route>
           <div>
-              <Route exact path="/" />             
-              <Route path="/counters" component={WrapCounterCountainer} />
-              <Route path="/about" component={AboutContainer} />
-              <Redirect from="*" to="/404" />
+            <MenuContainer/>
+              <div>
+                <Switch>
+                  <Route exact path="/" />             
+                  <Route path="/counters" component={WrapCounterCountainer} />
+                  <Route path="/about" component={AboutContainer} />
+                  <Redirect from='*' to='/404' />
+                </Switch>
+              </div>
           </div>
-        </div>
-      </Route>              
-    </Switch>
+        </Route>              
+      </Switch>
     </Router>
   </div>
 )
