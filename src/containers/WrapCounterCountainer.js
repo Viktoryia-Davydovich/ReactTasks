@@ -55,6 +55,8 @@ class WrapCounterContainer extends Component{
     }
 
     render(){
+        console.log("render - WrapCounterContainer");
+
         const props = {
             label: this.state.label,
             counters_count: this.state.counters_count,
