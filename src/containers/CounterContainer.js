@@ -60,15 +60,15 @@ class CounterContainer extends Component{
     componentWillReceiveProps(nextProps) {
         console.log('component will receive props - CounterContainer');
 
-        if(nextProps.label == 'add' && this.isCountEven()) {
+        if(nextProps.label === 'add' && this.isCountEven()) {
             this.setState({ count: this.state.count + 1 });
           }
       
-        if(nextProps.label == 'delete'  && !this.isCountEven()) {
+        if(nextProps.label === 'delete'  && !this.isCountEven()) {
             this.setState({ count: this.state.count - 1 });
         }
 
-        if(nextProps.label == 'reset') {
+        if(nextProps.label === 'reset') {
             this.setState({ count: 0 });
         }
     }

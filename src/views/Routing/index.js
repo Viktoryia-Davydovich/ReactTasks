@@ -1,26 +1,31 @@
 import React from 'react';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import {Redirect} from 'react-router';
 
 import WrapCounterCountainer from '../../containers/WrapCounterCountainer'
 import AboutContainer from '../../containers/AboutContainer'
 import NotFoundContainer from '../../containers/NotFoundContainer'
+import MenuContainer from '../../containers/MenuContainer'
 
 const Routing = () => (
+  <div>
     <Router>
-      <div>
-        <Tabs indicatorColor="primary" textColor="primary" value={0}>
-            <Tab label="About us" to='/about' component={Link} value={0}/>
-            <Tab label="Counters" to='/counters' component={Link} value={1}/>
-        </Tabs>
-        <Switch>
-            <Route path="/counters" component={WrapCounterCountainer} />
-            <Route path="/about" component={AboutContainer} />
-            <Route component={NotFoundContainer} />
-        </Switch>
-      </div>
+    <Switch>
+      <Route path="/404" component={NotFoundContainer} />
+      <Route>
+        <div>
+        <MenuContainer/>
+          <div>
+              <Route exact path="/" />             
+              <Route path="/counters" component={WrapCounterCountainer} />
+              <Route path="/about" component={AboutContainer} />
+              <Redirect from="*" to="/404" />
+          </div>
+        </div>
+      </Route>              
+    </Switch>
     </Router>
+  </div>
 )
 
 export default Routing;
