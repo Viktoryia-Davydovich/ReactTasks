@@ -9,6 +9,7 @@ return(
     <Tabs indicatorColor="primary" textColor="primary" value={value} onChange={handleChange} inkBarStyle={{background: 'blue'}}>
         <Tab label="About us" to='/about' component={Link} />
         <Tab label="Counters" to='/counters' component={Link}/>
+        <Tab label="Log in" to='/login' component={Link}/>
     </Tabs>
     );
 }

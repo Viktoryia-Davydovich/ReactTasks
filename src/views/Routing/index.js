@@ -6,25 +6,31 @@ import WrapCounterCountainer from '../../containers/WrapCounterCountainer'
 import AboutContainer from '../../containers/AboutContainer'
 import NotFoundContainer from '../../containers/NotFoundContainer'
 import MenuContainer from '../../containers/MenuContainer'
+import LoginContainer from '../../containers/LoginContainer'
 
-const Routing = () => (
-  <div>
+const Routing = () => {
+
+  return(
+    <div>
     <Router>
       <Switch>
         <Route path="/404" component={NotFoundContainer} />
         <Route>
           <div>
             <MenuContainer/>
-            <Switch>            
+            <Switch>
+              <Route exact path='/' />            
               <Route path="/counters" component={WrapCounterCountainer} />
               <Route path="/about" component={AboutContainer} />
-              <Redirect from='*' to='/404' />
+              <Route path="/login" component={LoginContainer} />
+              <Redirect from="*" to="/404"/> 
             </Switch>
           </div>
-        </Route>              
+        </Route>         
       </Switch>
     </Router>
   </div>
-)
+  )
+}
 
 export default Routing;
