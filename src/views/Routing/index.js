@@ -7,7 +7,7 @@ import WrapCounterCountainer from '../../containers/WrapCounterCountainer'
 import AboutContainer from '../../containers/AboutContainer'
 import NotFoundContainer from '../../containers/NotFoundContainer'
 
-const routing = (
+const Routing = () => (
     <Router>
       <div>
         <Tabs indicatorColor="primary" textColor="primary" value={0}>
@@ -23,4 +23,4 @@ const routing = (
     </Router>
 )
 
-export default routing;
+export default Routing;

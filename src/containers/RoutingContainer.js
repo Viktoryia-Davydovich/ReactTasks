@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import NotFound from '../views/NotFound/index';
+import Routing from '../views/Routing/index';
 
-class NotFoundContainer extends Component{
+class RoutingContainer extends Component{
     constructor(props){
         super(props);
 
@@ -11,13 +11,13 @@ class NotFoundContainer extends Component{
     }
 
     render(){
-        console.log('render - NotFoundContainer');
+        console.log('render - RoutingContainer');
 
         return (
-            <NotFound/>
+            <Routing/>
         )
     }
 
 }
 
-export default NotFoundContainer;
+export default RoutingContainer;

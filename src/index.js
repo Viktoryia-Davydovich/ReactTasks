@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import routing from './views/Routing/index'
+import RoutingContainer from './containers/RoutingContainer'
 
 ReactDOM.render(
-    routing,
+    <RoutingContainer></RoutingContainer>,
     document.getElementById('root')
   );
