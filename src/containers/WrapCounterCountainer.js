@@ -45,9 +45,12 @@ class WrapCounterContainer extends Component{
 
     reset_counters = () => 
     {
+        const existingsCounters = this.state.counters.slice(0);
+
         this.setState({
             counters_count: 1,
-            counters: [{ key: 1 }],
+            counters: existingsCounters.slice(0, 1),
+            label: 'reset'
         });
     }
 

@@ -9,7 +9,7 @@ const WrapCounter = ({label, counters_count, counters, add_counter, delete_count
       
   const elem = counters.map(({ key }) => {
     return (
-        <CounterContainer key={key} label={label}/>
+        <CounterContainer key={key} label={label} />
     );
   });
 

@@ -33,7 +33,6 @@ class CounterContainer extends Component{
     }
 
     render(){
-
         const props = {
             increment: this.increment,
             decrement: this.decrement,
@@ -45,7 +44,6 @@ class CounterContainer extends Component{
             <Counter {...props}/>
         )
     }
-
 
     componentDidMount() {
         console.log('component did mount');
@@ -64,9 +62,13 @@ class CounterContainer extends Component{
             this.setState({ count: this.state.count + 1 });
           }
       
-          if(nextProps.label == 'delete'  && !this.isCountEven()) {
+        if(nextProps.label == 'delete'  && !this.isCountEven()) {
             this.setState({ count: this.state.count - 1 });
-          }
+        }
+
+        if(nextProps.label == 'reset') {
+            this.setState({ count: 0 });
+        }
     }
 
     componentDidUpdate() {
@@ -75,8 +77,7 @@ class CounterContainer extends Component{
 
     componentWillUnmount() {
         console.log('component will unmount');
-    }
-    
+    }    
 }
 
 export default CounterContainer;
