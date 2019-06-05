@@ -15,14 +15,11 @@ const Routing = () => (
         <Route>
           <div>
             <MenuContainer/>
-              <div>
-                <Switch>
-                  <Route exact path="/" />             
-                  <Route path="/counters" component={WrapCounterCountainer} />
-                  <Route path="/about" component={AboutContainer} />
-                  <Redirect from='*' to='/404' />
-                </Switch>
-              </div>
+            <Switch>            
+              <Route path="/counters" component={WrapCounterCountainer} />
+              <Route path="/about" component={AboutContainer} />
+              <Redirect from='*' to='/404' />
+            </Switch>
           </div>
         </Route>              
       </Switch>
