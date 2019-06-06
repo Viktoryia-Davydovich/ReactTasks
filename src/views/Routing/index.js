@@ -11,12 +11,10 @@ import LoginContainer from '../../containers/LoginContainer'
 const Routing = () => {
 
   return(
-    <div>
     <Router>
       <Switch>
         <Route path="/404" component={NotFoundContainer} />
         <Route>
-          <div>
             <MenuContainer/>
             <Switch>
               <Route exact path='/' />            
@@ -25,11 +23,9 @@ const Routing = () => {
               <Route path="/login" component={LoginContainer} />
               <Redirect from="*" to="/404"/> 
             </Switch>
-          </div>
         </Route>         
       </Switch>
     </Router>
-  </div>
   )
 }
 
