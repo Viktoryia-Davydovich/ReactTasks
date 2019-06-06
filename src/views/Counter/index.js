@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TypoGraphy from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 import ButtonStyles from './styles';
 
@@ -35,4 +36,4 @@ Counter.propTypes = {
   reset: PropTypes.func.isRequired,
 }
 
-export default Counter;
+export default withStyles(ButtonStyles)(Counter);

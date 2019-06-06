@@ -1,6 +1,7 @@
 import { Button } from "@material-ui/core";
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
 import wrapCounterBtnStyles from './styles'
 import CounterContainer from '../../containers/CounterContainer'
@@ -35,4 +36,4 @@ WrapCounter.propTypes = {
     reset_counters: PropTypes.func.isRequired,
 }
 
-export default WrapCounter;
+export default withStyles(wrapCounterBtnStyles)(WrapCounter);
