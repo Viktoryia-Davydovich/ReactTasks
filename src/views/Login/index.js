@@ -17,13 +17,13 @@ const Login =  ({ email, password, errorEmail, errorPassword, handleChange, hand
                 id="email" label="Email Address" name="email" 
                 autoComplete="email" autoFocus  value={email}
                 onChange={handleChange}/>
-                <span>{errorEmail}</span>
+                <Typography color="error">{errorEmail}</Typography>
               <TextField
                 variant="outlined" margin="normal" required fullWidth 
                 name="password" label="Password" type="password" id="password" 
                 autoComplete="current-password" value={password}
                 onChange={handleChange}/>
-                <span>{errorPassword}</span>
+                <Typography color="error">{errorPassword}</Typography>
               <Button type="submit" variant="contained" color="primary" >
                 Log In
               </Button>
