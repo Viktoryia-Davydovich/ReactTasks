@@ -8,7 +8,7 @@ class MenuContainer extends Component{
     
         this.state = {
           value: '',
-        };
+        }
       }
     
       handleChange = (event, value) => {

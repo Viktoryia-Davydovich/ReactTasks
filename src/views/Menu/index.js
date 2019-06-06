@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -13,5 +14,10 @@ return(
     </Tabs>
     );
 }
+
+Menu.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+  }
 
 export default Menu;
