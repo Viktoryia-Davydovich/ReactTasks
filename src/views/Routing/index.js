@@ -21,7 +21,7 @@ const Routing = () => {
               <Route path="/counters" component={WrapCounterCountainer} />
               <Route path="/about" component={AboutContainer} />
               <Route path="/login" component={LoginContainer} />
-              <Redirect from="*" to="/404"/> 
+              <Route component={()=> (<Redirect from='*' to='/404'/>)}/> 
             </Switch>
         </Route>         
       </Switch>
