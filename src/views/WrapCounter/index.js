@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import wrapCounterBtnStyles from './styles'
 import CounterContainer from '../../containers/CounterContainer'
 
-const WrapCounter = ({label, counters_count, counters, add_counter, delete_counter, reset_counters}) => {
+const WrapCounter = ({label, counters_count, counters, add_counter, delete_counter, reset_counters, classes}) => {
       
   const elem = counters.map(({ key }) => {
     return (
@@ -16,13 +16,13 @@ const WrapCounter = ({label, counters_count, counters, add_counter, delete_count
 
     return(
         <div>
-            <Button style={wrapCounterBtnStyles.btnStyle} onClick={add_counter}>
+            <Button className={classes.btnStyle} onClick={add_counter}>
                 new counter
             </Button>
-            <Button style={wrapCounterBtnStyles.btnStyle} onClick={delete_counter}>
+            <Button className={classes.btnStyle} onClick={delete_counter}>
                 delete last
             </Button>
-            <Button style={wrapCounterBtnStyles.delBtnStyle} onClick={reset_counters}>
+            <Button className={classes.delBtnStyle} onClick={reset_counters}>
                 reset all
             </Button>
         {Array.from(Array(1), () => (elem))}

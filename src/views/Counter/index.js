@@ -6,22 +6,22 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ButtonStyles from './styles';
 
-const Counter = ({count, increment, decrement, reset}) => {
+const Counter = ({count, increment, decrement, reset, classes}) => {
   return(
     <div>
     <div>
-      <Button style={ButtonStyles.incrementBtnStyle} onClick={increment}>
+      <Button className={classes.incrementBtnStyle} onClick={increment}>
         increment
       </Button>
-      <Button style={ButtonStyles.incrementBtnStyle} onClick={decrement}>
+      <Button className={classes.incrementBtnStyle} onClick={decrement}>
         decrement
       </Button>
-      <Button style={ButtonStyles.resetBtnStyle} onClick={reset}>
+      <Button className={classes.resetBtnStyle} onClick={reset}>
         reset
       </Button>
     </div>
     <div>
-      <TypoGraphy style={ButtonStyles.typographyStyle}>
+      <TypoGraphy className={classes.typographyStyle}>
         {count}
       </TypoGraphy>
     </div>

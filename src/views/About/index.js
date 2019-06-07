@@ -6,13 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AboutStyles from './styles'
 
-const About = () => (
-    <Card style={AboutStyles.cardStyle}>
+const About = ({classes}) => (
+    <Card className={classes.cardStyle}>
         <CardContent align="center">
-        <Typography gutterBottom variant="h5" component="h2" style={AboutStyles.headerStyle}>
+        <Typography gutterBottom variant="h5" component="h2" className={classes.headerStyle}>
           Hey, we're iTechArt
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p" style={AboutStyles.textStyle} align="right">
+        <Typography variant="body2" color="textSecondary" component="p" className={classes.textStyle} align="right">
             A top-tier, one-stop custom software development company. 
             We provide dedicated teams packed with senior-level talent to help VC-backed startups 
             and fast-growing tech companies build successful, scalable products that users love.
