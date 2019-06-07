@@ -22,16 +22,7 @@ class LoginContainer extends Component{
       }
     
       validateField = (name, value) => {
-        switch (name) {
-          case 'email' : 
-            return validation.email.test(value) ? '' : errorMessages.email;
-          case 'password' : 
-            return validation.password.test(value) ? '' : errorMessages.password;
-          default:
-            break;
-        }
-    
-        return '';
+        return validation[name].test(value) ? '' : errorMessages[name];
       }
     
       handleSubmit = (event) => {
