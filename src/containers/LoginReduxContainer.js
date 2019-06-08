@@ -9,7 +9,7 @@ import { emailSelector, passwordSelector, emailErrorSelector, passwordErrorSelec
 
 
 class LoginReduxContainer extends React.Component{
-/*
+
     constructor(props){
         super(props);
 
@@ -19,8 +19,11 @@ class LoginReduxContainer extends React.Component{
             errorPassword: '',
             errorEmail: '',
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit(this);
     }
-*/
+
     handleChange(event){
         this.setState({[event.target.name] : event.target.value});
     }
@@ -29,8 +32,11 @@ class LoginReduxContainer extends React.Component{
         return validation[name].test(value) ? '' : errorMessages[name];
     }
 
-    handleSubmit(event){
-        event.preventDefault();
+    handleSubmit(form, event){
+        if (event){
+            event.preventDefault();
+        }
+
 
         const { loginSuccess, loginError, password, email, history } = this.props;
 
