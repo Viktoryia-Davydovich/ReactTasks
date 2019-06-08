@@ -10,6 +10,8 @@ return(
         <Tab label="About us" to='/about' component={Link} />
         <Tab label="Counters" to='/counters' component={Link}/>
         <Tab label="Log in" to='/login' component={Link}/>
+        <Tab label="Log in with Redux" to='/login-redux' component={Link}/>
+        <Tab label="Log in with Redux Form" to='/login-redux-form' component={Link}/>
     </Tabs>
     );
 }
