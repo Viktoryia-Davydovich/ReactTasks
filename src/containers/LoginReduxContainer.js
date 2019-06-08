@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {validation, errorMessages} from '../views/Login/validation'
 import LoginRedux from '../views/LoginRedux/index'
+import { updatePassword, updateEmail, loginSuccess, loginError } from '../views/LoginRedux/actions';
+import { emailSelector, passwordSelector, emailErrorSelector, passwordErrorSelector } from '../views/LoginRedux/selectors';
+
 
 class LoginReduxContainer extends React.Component{
-
+/*
     constructor(props){
         super(props);
 
@@ -15,7 +20,7 @@ class LoginReduxContainer extends React.Component{
             errorEmail: '',
         }
     }
-
+*/
     handleChange(event){
         this.setState({[event.target.name] : event.target.value});
     }
@@ -27,17 +32,18 @@ class LoginReduxContainer extends React.Component{
     handleSubmit(event){
         event.preventDefault();
 
+        const { loginSuccess, loginError, password, email, history } = this.props;
+
         const errorPassword = this.validateField('password', this.state.password);
         const errorEmail = this.validateField('email', this.state.email);
 
         if (!errorPassword && !errorEmail){
-            const { userInfo } = this.state;
-            this.props.onLogin({ userInfo });
-
+            loginSuccess();
+            history.push('/study/login-redux/success');
         }
 
         else{
-            this.setState({ 
+            loginError({ 
                 errorPassword,
                 errorEmail
             })
@@ -61,4 +67,29 @@ class LoginReduxContainer extends React.Component{
     }
 }
 
-export default LoginReduxContainer;
+LoginReduxContainer.propTypes = {
+    password: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    errorPassword: PropTypes.string.isRequired,
+    errorEmail: PropTypes.string.isRequired,
+    loginSuccess: PropTypes.func.isRequired,
+    loginError: PropTypes.func.isRequired,
+    updatePassword: PropTypes.func.isRequired,
+    updateEmail: PropTypes.func.isRequired,
+  }
+  
+  const mapStateToProps = state => ({
+    password: passwordSelector(state),
+    email: emailSelector(state),
+    errorPassword: passwordErrorSelector(state),
+    errorEmail: emailErrorSelector(state),
+  });
+  
+  const mapDispatchToProps = dispatch => ({
+    loginSuccess: data => dispatch(loginSuccess(data)),
+    loginError: data => dispatch(loginError(data)),
+    updatePassword: data => dispatch(updatePassword(data)),
+    updateEmail: data => dispatch(updateEmail(data)),
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginReduxContainer);

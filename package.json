@@ -5,17 +5,21 @@
   "dependencies": {
     "@material-ui/core": "^4.0.2",
     "eslint": "^5.16.0",
+    "normalize-scroll-left": "^0.2.0",
     "path-to-regexp": "^3.0.0",
     "prettier": "^1.18.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
     "react-route": "^1.0.3",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
     "redux": "^4.0.1",
-    "redux-form": "^8.2.3"
+    "redux-actions": "^2.6.5",
+    "redux-form": "^8.2.3",
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -8,6 +8,7 @@ import NotFoundContainer from '../../containers/NotFoundContainer'
 import MenuContainer from '../../containers/MenuContainer'
 import LoginContainer from '../../containers/LoginContainer'
 import LoginReduxContainer from '../../containers/LoginReduxContainer'
+import SuccessContainer from '../../containers/LoginReduxSuccess'
 
 const Routing = () => {
 
@@ -23,6 +24,7 @@ const Routing = () => {
               <Route path="/about" component={AboutContainer} />
               <Route path="/login" component={LoginContainer} />
               <Route path="/login-redux" component={LoginReduxContainer} />
+              <Route path="/login-redux/success" component={SuccessContainer}/>
               <Route path="/login-redux-form" /*component={LoginReduxFormContainer}*/ component={()=> (<Redirect from='*' to='/404'/>)}/>
               <Route component={()=> (<Redirect from='*' to='/404'/>)}/> 
             </Switch>
