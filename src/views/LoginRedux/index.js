@@ -4,12 +4,15 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-const LoginRedux =  ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit }) => {   
+import LoginStyles from '../Login/styles'
+
+const LoginRedux =  ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit, classes }) => {   
       return (
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" className={classes.alignmentStyle}>
             <Typography component="h1" variant="h5">
-              Log in
+              Log in with Redux
             </Typography>
             <form onSubmit={handleSubmit}>
               <TextField
@@ -24,15 +27,15 @@ const LoginRedux =  ({ email, password, errorEmail, errorPassword, handleChange,
                 autoComplete="current-password" value={password}
                 onChange={handleChange}/>
                 <Typography color="error">{errorPassword}</Typography>
-              <Button type="submit" variant="contained" color="primary" >
-                Log In
+              <Button type="submit" variant="contained" color="secondary" >
+                Log in with redux
               </Button>
             </form>
         </Container>
       );
     }
 
-    Login.propTypes = {
+    LoginRedux.propTypes = {
         email: PropTypes.string.isRequired,
         password: PropTypes.string.isRequired,
         errorEmail: PropTypes.string.isRequired,
@@ -41,4 +44,4 @@ const LoginRedux =  ({ email, password, errorEmail, errorPassword, handleChange,
         handleSubmit: PropTypes.func.isRequired,
       }
 
-export default LoginRedux;
+export default withStyles(LoginStyles)(LoginRedux);

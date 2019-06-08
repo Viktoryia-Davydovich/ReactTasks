@@ -4,10 +4,13 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-const Login =  ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit }) => {   
+import LoginStyles from './styles'
+
+const Login =  ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit, classes }) => {   
       return (
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" className={classes.alignmentStyle}>
             <Typography component="h1" variant="h5">
               Log in
             </Typography>
@@ -41,4 +44,4 @@ const Login =  ({ email, password, errorEmail, errorPassword, handleChange, hand
         handleSubmit: PropTypes.func.isRequired,
       }
 
-export default Login;
+export default withStyles(LoginStyles)(Login);
