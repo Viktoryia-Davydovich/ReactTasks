@@ -9,6 +9,8 @@ import MenuContainer from '../../containers/MenuContainer'
 import LoginContainer from '../../containers/LoginContainer'
 import LoginReduxContainer from '../../pages/LoginRedux/components/LoginReduxContainer'
 import SuccessContainer from '../../pages/LoginRedux/LoginSuccess/container/SuccessContainer'
+import LoginReduxForm from '../../pages/LoginReduxForm';
+import SuccessReduxForm from '../../pages/LoginReduxForm/pages/Success';
 
 const Routing = () => {
 
@@ -25,7 +27,8 @@ const Routing = () => {
               <Route path="/login" component={LoginContainer} />
               <Route path="/login-redux" component={LoginReduxContainer} />
               <Route path="/login-redux/success" component={SuccessContainer}/>
-              <Route path="/login-redux-form" /*component={LoginReduxFormContainer}*/ component={()=> (<Redirect from='*' to='/404'/>)}/>
+              <Route path="/login-redux-form" component={LoginReduxForm}/>
+              <Route path='/login-redux-form/success' component={SuccessReduxForm} />
               <Route component={()=> (<Redirect from='*' to='/404'/>)}/> 
             </Switch>
         </Route>         
