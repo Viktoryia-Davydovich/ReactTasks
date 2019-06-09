@@ -11,7 +11,7 @@ const InputField = ({ classes, input, label, type, meta: { touched, error }}) =>
       <div>
         <TextField
         variant="outlined" margin="normal" required fullWidth autoFocus
-        className={[classes.label, classes.field]} {...input}/>
+        className={classes.field} {...input}/>
         <Typography color="error" className={classes.errorText}>{error}</Typography>
     </div>
   )

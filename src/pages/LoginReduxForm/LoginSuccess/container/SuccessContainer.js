@@ -7,7 +7,7 @@ import { emailSelector, passwordSelector } from '../../selectors/index';
 
 class SuccessFormContainer extends Component {
   render () {
-    console.log('----SuccessContainer', this)
+    console.log('Success Form Container', this)
     const props = {
       email: this.props.email,
       password: this.props.password,
