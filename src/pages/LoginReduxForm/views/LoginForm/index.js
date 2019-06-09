@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import style from './styles';
+import InputField from '../InputField';
 
 const LoginForm = (props) => {
   const { 
@@ -25,27 +25,35 @@ const LoginForm = (props) => {
   } = props;
 
   return (
-    <Container maxWidth="xs" className={classes.alignmentStyle}>
-    <Typography component="h1" variant="h5">
-      Log in
-    </Typography>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        variant="outlined" margin="normal" required fullWidth 
-        id="email" label="Email Address" name="email" 
-        autoComplete="email" autoFocus  value={email}
-        onChange={emailOnChange} validate={[requiredValidation, emailValidation]}/>
-      <TextField
-        variant="outlined" margin="normal" required fullWidth 
-        name="password" label="Password" type="password" id="password" 
-        autoComplete="current-password" value={password}
-        onChange={passwordOnChange} validate={[requiredValidation, passwordValidation]}/>
-      <Button type="submit" variant="contained" color="default" >
-        Log In
-      </Button>
-    </form>
-    <pre>{ JSON.stringify({email, password}) }</pre>
-    </Container>
+    <div className = {classes.root}>
+      <Container maxWidth="xs" className={classes.alignmentStyle}>
+      <Typography component="h1" variant="h5">
+        Log in
+      </Typography>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)} >
+        <Field
+            component={InputField}
+            name='email'
+            type='email'
+            label='Email'
+            validate={[requiredValidation, emailValidation]}
+            onChange={emailOnChange}
+          />
+          <Field
+            component={InputField}
+            name='password'
+            type='password'
+            label='Введите ваш пароль'
+            validate={[requiredValidation, passwordValidation]}
+            onChange={passwordOnChange}
+          />
+        <Button className={classes.button} type="submit" variant="contained" color="default" >
+          Log In
+        </Button>
+      </form>
+      <pre>{ JSON.stringify({email, password}) }</pre>
+      </Container>
+    </div>
   )
 }
 

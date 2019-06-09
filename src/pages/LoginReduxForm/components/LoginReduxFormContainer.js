@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import LoginForm from '../views/LoginForm';
-import { validations, errorMessages } from '../constants';
+import LoginForm from '../views/LoginForm/index';
+import { validation, errorMessages } from '../../../views/Login/validation';
 import { submitForm } from '../actions';
 import { emailSelector, passwordSelector } from '../selectors';
 
@@ -19,7 +19,7 @@ class LoginContainer extends Component {
   
   handleSubmit = (values) => {
     this.props.submitForm(values)
-    this.props.history.push('/study/login-redux-form/success');
+    this.props.history.push('/login-redux-form/success');
   }
 
   requiredValidation = (value) => {
@@ -27,11 +27,11 @@ class LoginContainer extends Component {
   }
 
   emailValidation = (value) => {
-    return (validations.email.test(value)) ? '' : errorMessages.email;
+    return (validation.email.test(value)) ? '' : errorMessages.email;
   }
 
   passwordValidation = (value) => {
-    return (validations.password.test(value)) ? '' : errorMessages.password;
+    return (validation.password.test(value)) ? '' : errorMessages.password;
   }
 
   emailOnChange = (event, value) => {

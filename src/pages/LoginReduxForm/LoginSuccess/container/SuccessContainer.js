@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Success from '../views/Success';
-import { emailSelector, passwordSelector } from '../../../selectors';
+import Success from '../views/index';
+import { emailSelector, passwordSelector } from '../../selectors/index';
 
-class SuccessContainer extends Component {
+class SuccessFormContainer extends Component {
   render () {
     console.log('----SuccessContainer', this)
     const props = {
@@ -17,7 +17,7 @@ class SuccessContainer extends Component {
   }
 }
 
-SuccessContainer.propTypes = {
+SuccessFormContainer.propTypes = {
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 }
@@ -29,4 +29,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps
-)(SuccessContainer);
+)(SuccessFormContainer);
