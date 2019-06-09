@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions';
-
 import { loginSuccess, loginError } from '../actions';
 
 const initialState = '';

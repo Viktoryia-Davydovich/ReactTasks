@@ -6,31 +6,32 @@ import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import LoginStyles from '../Login/styles'
+import LoginStyles from './styles'
 
-const LoginRedux =  ({ email, password, errorEmail, errorPassword, handleChange, handleSubmit, classes }) => {   
+const LoginRedux =  ({ email, password, errorEmail, errorPassword, onChangeEmail, onChangePassword, handleSubmit, classes }) => {   
       return (
         <Container maxWidth="xs" className={classes.alignmentStyle}>
             <Typography component="h1" variant="h5">
-              Log in with Redux
+              Log in
             </Typography>
             <form onSubmit={handleSubmit}>
               <TextField
                 variant="outlined" margin="normal" required fullWidth 
                 id="email" label="Email Address" name="email" 
                 autoComplete="email" autoFocus  value={email}
-                onChange={handleChange}/>
+                onChange={onChangeEmail}/>
                 <Typography color="error">{errorEmail}</Typography>
               <TextField
                 variant="outlined" margin="normal" required fullWidth 
                 name="password" label="Password" type="password" id="password" 
                 autoComplete="current-password" value={password}
-                onChange={handleChange}/>
+                onChange={onChangePassword}/>
                 <Typography color="error">{errorPassword}</Typography>
               <Button type="submit" variant="contained" color="secondary" >
-                Log in with redux
+                Log In
               </Button>
             </form>
+            <pre>{ JSON.stringify({email, password}) }</pre>
         </Container>
       );
     }
@@ -40,7 +41,8 @@ const LoginRedux =  ({ email, password, errorEmail, errorPassword, handleChange,
         password: PropTypes.string.isRequired,
         errorEmail: PropTypes.string.isRequired,
         errorPassword: PropTypes.string.isRequired,
-        handleChange: PropTypes.func.isRequired,
+        onChangeEmail: PropTypes.func.isRequired,
+        onChangePassword: PropTypes.func.isRequired,
         handleSubmit: PropTypes.func.isRequired,
       }
 

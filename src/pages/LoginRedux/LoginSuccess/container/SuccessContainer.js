@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Success from '../views/LoginReduxSuccess/index';
-import { emailSelector, passwordSelector } from '../views/LoginRedux/selectors';
+import Success from '../views/index'
+import { emailSelector, passwordSelector } from '../../selectors/index';
 
 class SuccessContainer extends Component {
   render () {

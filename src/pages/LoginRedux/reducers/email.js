@@ -1,6 +1,5 @@
 import { handleActions } from 'redux-actions';
-
-import { updateEmail } from '../actions'
+import { updateEmail } from '../actions';
 
 const initialState = '';
 

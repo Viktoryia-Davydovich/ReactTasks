@@ -7,8 +7,8 @@ import AboutContainer from '../../containers/AboutContainer'
 import NotFoundContainer from '../../containers/NotFoundContainer'
 import MenuContainer from '../../containers/MenuContainer'
 import LoginContainer from '../../containers/LoginContainer'
-import LoginReduxContainer from '../../containers/LoginReduxContainer'
-import SuccessContainer from '../../containers/LoginReduxSuccess'
+import LoginReduxContainer from '../../pages/LoginRedux/components/LoginReduxContainer'
+import SuccessContainer from '../../pages/LoginRedux/LoginSuccess/container/SuccessContainer'
 
 const Routing = () => {
 

@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions';
-
 import { updatePassword } from '../actions';
 
 const initialState = '';
