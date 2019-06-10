@@ -1,2 +1,2 @@
-export const emailSelector = (state) => (state.loginForm.email);
-export const passwordSelector = (state) => (state.loginForm.password);
+export const emailSelector = (state) => (state.loginReduxFormReducers.email);
+export const passwordSelector = (state) => (state.loginReduxFormReducers.password);
