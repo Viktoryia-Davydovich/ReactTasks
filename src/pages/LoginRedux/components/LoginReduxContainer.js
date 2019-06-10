@@ -1,65 +1,64 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import LoginRedux from '../views/index';
-import { validation, errorMessages } from '../../../views/Login/validation';
-import { 
+import LoginRedux from "../views/index";
+import { validation, errorMessages } from "../../../views/Login/validation";
+import {
   updatePassword,
   updateEmail,
   loginSuccess,
   loginError
-} from '../actions';
+} from "../actions";
 import {
   emailSelector,
   passwordSelector,
   emailErrorSelector,
-  passwordErrorSelector,
-} from '../selectors';
+  passwordErrorSelector
+} from "../selectors";
 
 class LoginReduxContainer extends Component {
-
   validateField = (name, value) => {
     switch (name) {
-      case 'email' : 
-        return validation.email.test(value) ? '' : errorMessages.email;
-      case 'password' : 
-        return validation.password.test(value) ? '' : errorMessages.password;
+      case "email":
+        return validation.email.test(value) ? "" : errorMessages.email;
+      case "password":
+        return validation.password.test(value) ? "" : errorMessages.password;
       default:
         break;
     }
 
-    return '';
-  }
+    return "";
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const { loginSuccess, loginError, password, email, history } = this.props;
 
-    const errorPassword = this.validateField('password', password);
-    const errorEmail = this.validateField('email', email);
-    
-    if(!errorPassword && !errorEmail) {
+    const errorPassword = this.validateField("password", password);
+    const errorEmail = this.validateField("email", email);
+
+    if (!errorPassword && !errorEmail) {
       loginSuccess();
-      history.push('/login-redux/success');
+      history.push("/login-redux/success");
     } else {
-      loginError({ 
+      loginError({
         errorPassword,
-        errorEmail,
+        errorEmail
       });
     }
-  }
+  };
 
-  onChangePassword = (event) => {
+  onChangePassword = event => {
     this.props.updatePassword({ password: event.target.value });
-  }
+  };
 
-  onChangeEmail = (event) => {
+  onChangeEmail = event => {
     this.props.updateEmail({ email: event.target.value });
-  }
+  };
 
-  render () {
+  render() {
     const props = {
       email: this.props.email,
       password: this.props.password,
@@ -67,10 +66,10 @@ class LoginReduxContainer extends Component {
       errorPassword: this.props.errorPassword,
       onChangePassword: this.onChangePassword,
       onChangeEmail: this.onChangeEmail,
-      handleSubmit : this.handleSubmit,
-    }
+      handleSubmit: this.handleSubmit
+    };
 
-    return <LoginRedux {...props} />
+    return <LoginRedux {...props} />;
   }
 }
 
@@ -82,24 +81,24 @@ LoginReduxContainer.propTypes = {
   loginSuccess: PropTypes.func.isRequired,
   loginError: PropTypes.func.isRequired,
   updatePassword: PropTypes.func.isRequired,
-  updateEmail: PropTypes.func.isRequired,
-}
+  updateEmail: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   password: passwordSelector(state),
   email: emailSelector(state),
   errorPassword: passwordErrorSelector(state),
-  errorEmail: emailErrorSelector(state),
+  errorEmail: emailErrorSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   loginSuccess: data => dispatch(loginSuccess(data)),
   loginError: data => dispatch(loginError(data)),
   updatePassword: data => dispatch(updatePassword(data)),
-  updateEmail: data => dispatch(updateEmail(data)),
+  updateEmail: data => dispatch(updateEmail(data))
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LoginReduxContainer);

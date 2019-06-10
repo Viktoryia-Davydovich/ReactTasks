@@ -1,79 +1,79 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import LoginForm from '../views/LoginForm/index';
-import { validation, errorMessages } from '../../../views/Login/validation';
-import { submitForm } from '../actions';
-import { emailSelector, passwordSelector } from '../selectors';
+import LoginForm from "../views/LoginForm/index";
+import { validation, errorMessages } from "../../../views/Login/validation";
+import { submitForm } from "../actions";
+import { emailSelector, passwordSelector } from "../selectors";
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      password: '',
-      email: ''
+      password: "",
+      email: ""
     };
   }
-  
-  handleSubmit = (values) => {
-    this.props.submitForm(values)
-    this.props.history.push('/login-redux-form/success');
-  }
 
-  requiredValidation = (value) => {
-    return value ? '' : 'Required';
-  }
+  handleSubmit = values => {
+    this.props.submitForm(values);
+    this.props.history.push("/login-redux-form/success");
+  };
 
-  emailValidation = (value) => {
-    return (validation.email.test(value)) ? '' : errorMessages.email;
-  }
+  requiredValidation = value => {
+    return value ? "" : "Required";
+  };
 
-  passwordValidation = (value) => {
-    return (validation.password.test(value)) ? '' : errorMessages.password;
-  }
+  emailValidation = value => {
+    return validation.email.test(value) ? "" : errorMessages.email;
+  };
+
+  passwordValidation = value => {
+    return validation.password.test(value) ? "" : errorMessages.password;
+  };
 
   emailOnChange = (event, value) => {
     this.setState({ email: value });
-  }
+  };
 
   passwordOnChange = (event, value) => {
     this.setState({ password: value });
-  }
+  };
 
-  render () {
+  render() {
     const props = {
-      email:  this.state.email,
-      password:  this.state.password,
+      email: this.state.email,
+      password: this.state.password,
       onSubmit: this.handleSubmit,
       emailValidation: this.emailValidation,
       passwordValidation: this.passwordValidation,
       requiredValidation: this.requiredValidation,
       emailOnChange: this.emailOnChange,
-      passwordOnChange: this.passwordOnChange,
-    }
+      passwordOnChange: this.passwordOnChange
+    };
 
-    return <LoginForm {...props} />
+    return <LoginForm {...props} />;
   }
 }
 
 LoginContainer.propTypes = {
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  submitForm: PropTypes.func.isRequired,
-}
+  submitForm: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   email: emailSelector(state),
-  password: passwordSelector(state),
+  password: passwordSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  submitForm: data => dispatch(submitForm(data)),
+  submitForm: data => dispatch(submitForm(data))
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LoginContainer);

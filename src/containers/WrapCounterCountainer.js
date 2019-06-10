@@ -1,99 +1,92 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import WrapCounter from '../views/WrapCounter/index';
+import WrapCounter from "../views/WrapCounter/index";
 
+class WrapCounterContainer extends Component {
+  constructor(props) {
+    super(props);
 
-class WrapCounterContainer extends Component{
-    constructor(props){
-        super(props);
-
-        this.state = {
-            counters_count: 1,
-            counters: [
-                {
-                    key: 1,
-                }
-            ],
-            label: ''
+    this.state = {
+      counters_count: 1,
+      counters: [
+        {
+          key: 1
         }
+      ],
+      label: ""
+    };
+  }
+
+  add_counter = () => {
+    const existingsCounters = this.state.counters.slice(0);
+
+    this.setState({
+      counters_count: this.state.counters_count + 1,
+      counters: [...existingsCounters, { key: this.state.counters_count + 1 }],
+      label: "add"
+    });
+  };
+
+  delete_counter = () => {
+    const existingsCounters = this.state.counters.slice(0);
+
+    if (this.state.counters_count > 1) {
+      this.setState({
+        counters_count: this.state.counters_count - 1,
+        counters: existingsCounters.slice(0, -1),
+        label: "delete"
+      });
     }
+  };
 
-    add_counter = () => {
-        const existingsCounters = this.state.counters.slice(0);
+  reset_counters = () => {
+    const existingsCounters = this.state.counters.slice(0);
 
-        this.setState({
-            counters_count: this.state.counters_count + 1,
-            counters: [...existingsCounters, { key: this.state.counters_count + 1 }],
-            label: 'add'
-        });
-    }
+    this.setState({
+      counters_count: 1,
+      counters: existingsCounters.slice(0, 1),
+      label: "reset"
+    });
+  };
 
-    delete_counter = () => {
+  render() {
+    console.log("render - WrapCounterContainer");
 
-        const existingsCounters = this.state.counters.slice(0);
+    const props = {
+      label: this.state.label,
+      counters_count: this.state.counters_count,
+      counters: this.state.counters,
+      add_counter: this.add_counter,
+      delete_counter: this.delete_counter,
+      reset_counters: this.reset_counters
+    };
 
-        if (this.state.counters_count > 1){
-            
-        this.setState({
-            counters_count: this.state.counters_count - 1,
-            counters: existingsCounters.slice(0, -1),
-            label: 'delete'
-        });
-       
-        }
-    }
+    return <WrapCounter {...props} />;
+  }
 
-    reset_counters = () => 
-    {
-        const existingsCounters = this.state.counters.slice(0);
+  componentDidMount() {
+    console.log("component did mount - WrapCounterContainer");
+  }
 
-        this.setState({
-            counters_count: 1,
-            counters: existingsCounters.slice(0, 1),
-            label: 'reset'
-        });
-    }
+  shouldComponentUpdate() {
+    console.log("component should update - WrapCounterContainer");
 
-    render(){
-        console.log("render - WrapCounterContainer");
+    return true;
+  }
 
-        const props = {
-            label: this.state.label,
-            counters_count: this.state.counters_count,
-            counters: this.state.counters,
-            add_counter: this.add_counter,
-            delete_counter: this.delete_counter,
-            reset_counters: this.reset_counters,
-        }
+  componentWillReceiveProps() {
+    console.log("component will receive props - WrapCounterContainer");
 
-        return (
-            <WrapCounter {...props}/>
-        )
-    }
+    return true;
+  }
 
-    componentDidMount(){
-        console.log("component did mount - WrapCounterContainer");
-    }
+  componentDidUpdate() {
+    console.log("component did update - WrapCounterContainer");
+  }
 
-    shouldComponentUpdate() {
-        console.log("component should update - WrapCounterContainer");
-    
-        return true;
-    }
-
-    componentWillReceiveProps() {
-        console.log("component will receive props - WrapCounterContainer");
-    
-        return true;
-    }
-
-    componentDidUpdate() {
-        console.log("component did update - WrapCounterContainer");
-    }
-
-    componentWillUnmount(){
-        console.log("component will unmount - WrapCounterContainer");
-    }
+  componentWillUnmount() {
+    console.log("component will unmount - WrapCounterContainer");
+  }
 }
 
 export default WrapCounterContainer;

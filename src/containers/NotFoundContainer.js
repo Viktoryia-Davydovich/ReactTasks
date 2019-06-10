@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import NotFound from '../views/NotFound/index';
+import React, { Component } from "react";
+import NotFound from "../views/NotFound/index";
 
-class NotFoundContainer extends Component{
+class NotFoundContainer extends Component {
+  render() {
+    console.log("render - NotFoundContainer");
 
-    render(){
-        console.log('render - NotFoundContainer');
-
-        return (
-            <NotFound/>
-        )
-    }
+    return <NotFound />;
+  }
 }
 
 export default NotFoundContainer;

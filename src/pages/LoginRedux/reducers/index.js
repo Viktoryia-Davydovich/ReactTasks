@@ -1,15 +1,15 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import emailError from './emailError';
-import email from './email';
-import passwordError from './passwordError';
-import password from './password';
+import emailError from "./emailError";
+import email from "./email";
+import passwordError from "./passwordError";
+import password from "./password";
 
 let loginReduxReducers = combineReducers({
   emailError,
   email,
   passwordError,
-  password,
+  password
 });
 
 export default loginReduxReducers;

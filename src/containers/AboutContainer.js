@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-import About from '../views/About/index';
+import React, { Component } from "react";
+import About from "../views/About/index";
 
-class AboutContainer extends Component{
+class AboutContainer extends Component {
+  render() {
+    console.log("render - AboutContainer");
 
-    render(){
-        console.log('render - AboutContainer');
-
-        return (
-            <About/>
-        )
-    }
-
+    return <About />;
+  }
 }
 
 export default AboutContainer;

@@ -1,8 +1,11 @@
-import { handleActions } from 'redux-actions';
-import { updateEmail } from '../actions';
+import { handleActions } from "redux-actions";
+import { updateEmail } from "../actions";
 
-const initialState = '';
+const initialState = "";
 
-export default  handleActions({
-  [updateEmail]: (state, action) => (action.payload.email),
-}, initialState);
+export default handleActions(
+  {
+    [updateEmail]: (state, action) => action.payload.email
+  },
+  initialState
+);

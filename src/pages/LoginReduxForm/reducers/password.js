@@ -1,9 +1,12 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
-import { submitForm } from '../actions';
+import { submitForm } from "../actions";
 
-const initialState = '';
+const initialState = "";
 
-export default handleActions({
-  [submitForm]: (state, action) => (action.payload.password),
-}, initialState);
+export default handleActions(
+  {
+    [submitForm]: (state, action) => action.payload.password
+  },
+  initialState
+);

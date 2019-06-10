@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
 
-import RoutingContainer from './containers/RoutingContainer'
-import store from './store';
+import RoutingContainer from "./containers/RoutingContainer";
+import store from "./store";
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <Provider store={store}>
-        <RoutingContainer>
-        </RoutingContainer>
+        <RoutingContainer></RoutingContainer>
       </Provider>
-    )
+    );
   }
 }
 

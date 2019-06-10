@@ -1,10 +1,12 @@
-import { handleActions } from 'redux-actions';
-import { loginSuccess, loginError } from '../actions';
+import { handleActions } from "redux-actions";
+import { loginSuccess, loginError } from "../actions";
 
-const initialState = '';
+const initialState = "";
 
-export default handleActions({
-  [loginSuccess]: () => (initialState),
-  [loginError]: (state, action) => (action.payload.errorPassword),
-}, initialState);
-
+export default handleActions(
+  {
+    [loginSuccess]: () => initialState,
+    [loginError]: (state, action) => action.payload.errorPassword
+  },
+  initialState
+);
