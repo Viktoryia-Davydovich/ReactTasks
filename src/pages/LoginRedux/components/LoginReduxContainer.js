@@ -67,7 +67,7 @@ class LoginReduxContainer extends Component {
       errorPassword: this.props.errorPassword,
       onChangePassword: this.onChangePassword,
       onChangeEmail: this.onChangeEmail,
-      onSubmit: this.handleSubmit,
+      handleSubmit : this.handleSubmit,
     }
 
     return <LoginRedux {...props} />

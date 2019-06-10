@@ -26,10 +26,10 @@ const Routing = () => {
               <Route path="/counters" component={WrapCounterCountainer} />
               <Route path="/about" component={AboutContainer} />
               <Route path="/login" component={LoginContainer} />
-              <Route path="/login-redux" component={LoginReduxContainer} />
               <Route path="/login-redux/success" component={SuccessContainer}/>
-              <Route path="/login-redux-form" component={LoginReduxFormContainer}/>
+              <Route path="/login-redux" component={LoginReduxContainer} />
               <Route path="/login-redux-form/success" component={SuccessFormContainer} />
+              <Route path="/login-redux-form" component={LoginReduxFormContainer}/>
               <Route component={()=> (<Redirect from='*' to='/404'/>)}/> 
             </Switch>
         </Route>         
