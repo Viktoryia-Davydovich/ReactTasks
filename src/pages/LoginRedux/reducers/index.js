@@ -5,9 +5,11 @@ import email from './email';
 import passwordError from './passwordError';
 import password from './password';
 
-export default combineReducers({
+let loginReduxReducers = combineReducers({
   emailError,
   email,
   passwordError,
   password,
 });
+
+export default loginReduxReducers;

@@ -3,7 +3,9 @@ import { combineReducers } from 'redux';
 import email from './email';
 import password from './password';
 
-export default combineReducers({
+ let loginReduxFormReducers = combineReducers({
   email,
   password,
 });
+
+export default loginReduxFormReducers;

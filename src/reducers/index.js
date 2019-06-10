@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import login from '../pages/LoginRedux/reducers/index';
-import loginForm from '../pages/LoginReduxForm/reducers';
+import loginReduxReducers from '../pages/LoginRedux/reducers/index';
+import loginReduxFormReducers from '../pages/LoginReduxForm/reducers/index';
 
-export default combineReducers({
-  login,
-  loginForm,
+let rootReducer = combineReducers({
+  loginReduxReducers,
+  loginReduxFormReducers,
   form: formReducer
 });
+
+export default rootReducer;
