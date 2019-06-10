@@ -42,7 +42,7 @@ class LoginReduxContainer extends Component {
     
     if(!errorPassword && !errorEmail) {
       loginSuccess();
-      history.push('/study/login-redux/success');
+      history.push('/login-redux/success');
     } else {
       loginError({ 
         errorPassword,
