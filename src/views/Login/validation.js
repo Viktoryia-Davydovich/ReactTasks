@@ -5,5 +5,5 @@ export const validation = {
 
 export const errorMessages = {
   email: "Invalid email",
-  password: "Invalid password"
+  password: "Invalid password",
 };
