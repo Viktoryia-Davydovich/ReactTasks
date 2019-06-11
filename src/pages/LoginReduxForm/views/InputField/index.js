@@ -20,6 +20,10 @@ const InputField = ({
         margin="normal"
         required
         fullWidth
+        id="email"
+        label={label}
+        name="email"
+        autoComplete="email"
         autoFocus
         className={classes.field}
         {...input}

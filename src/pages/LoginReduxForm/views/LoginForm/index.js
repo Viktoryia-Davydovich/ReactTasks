@@ -4,6 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -18,7 +19,6 @@ const LoginForm = props => {
     passwordOnChange,
     emailValidation,
     passwordValidation,
-    requiredValidation,
     onSubmit,
     classes,
     handleSubmit
@@ -35,16 +35,16 @@ const LoginForm = props => {
             component={InputField}
             name="email"
             type="email"
-            label="Email"
-            validate={[requiredValidation, emailValidation]}
+            label="Email Address"
+            validate={emailValidation}
             onChange={emailOnChange}
           />
           <Field
             component={InputField}
             name="password"
             type="password"
-            label="Введите ваш пароль"
-            validate={[requiredValidation, passwordValidation]}
+            label="Password"
+            validate={passwordValidation}
             onChange={passwordOnChange}
           />
           <Button
