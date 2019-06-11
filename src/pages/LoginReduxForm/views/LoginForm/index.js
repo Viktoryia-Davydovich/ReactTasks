@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import style from "./styles";
+import LoginStyles from "./styles";
 import InputField from "../InputField";
 
 const LoginForm = props => {
@@ -71,7 +71,7 @@ LoginForm.propTypes = {
   passwordOnChange: PropTypes.func.isRequired
 };
 
-const LoginFormWithStyle = withStyles(style)(LoginForm);
+const LoginFormWithStyle = withStyles(LoginStyles)(LoginForm);
 
 export default reduxForm({
   form: "login"
