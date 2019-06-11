@@ -4,7 +4,6 @@ import { reduxForm, Field } from "redux-form";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -68,7 +67,6 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   emailValidation: PropTypes.func.isRequired,
   passwordValidation: PropTypes.func.isRequired,
-  requiredValidation: PropTypes.func.isRequired,
   emailOnChange: PropTypes.func.isRequired,
   passwordOnChange: PropTypes.func.isRequired
 };

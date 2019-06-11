@@ -22,6 +22,7 @@ const InputField = ({
         fullWidth
         id="email"
         label={label}
+        type={type}
         name="email"
         autoComplete="email"
         autoFocus
