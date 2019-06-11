@@ -55,6 +55,7 @@ const Login = ({
           Log In
         </Button>
       </form>
+      <pre>{JSON.stringify({ email, password })}</pre>
     </Container>
   );
 };
