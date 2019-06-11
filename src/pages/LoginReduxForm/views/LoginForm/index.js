@@ -34,6 +34,7 @@ const LoginForm = props => {
             component={InputField}
             name="email"
             type="email"
+            autoFocus={true}
             label="Email Address"
             validate={emailValidation}
             onChange={emailOnChange}
@@ -42,6 +43,7 @@ const LoginForm = props => {
             component={InputField}
             name="password"
             type="password"
+            autoFocus={false}
             label="Password"
             validate={passwordValidation}
             onChange={passwordOnChange}

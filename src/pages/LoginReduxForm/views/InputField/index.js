@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import style from "./styles";
 
 const InputField = ({
-  classes,
+  autoFocus,
   input,
   label,
   type,
@@ -20,13 +20,12 @@ const InputField = ({
         margin="normal"
         required
         fullWidth
+        autoFocus={autoFocus}
         label={label}
         type={type}
-        autoFocus
-        className={classes.field}
         {...input}
       />
-      <Typography color="error" className={classes.errorText}>
+      <Typography color="error">
         {error}
       </Typography>
     </div>
