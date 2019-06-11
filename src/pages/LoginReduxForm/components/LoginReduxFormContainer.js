@@ -22,11 +22,11 @@ class LoginContainer extends Component {
     this.props.history.push("/login-redux-form/success");
   };
 
-  emailValidation = value => {
+  emailValidation = (value = "") => {
     return validation.email.test(value) ? "" : errorMessages.email;
   };
 
-  passwordValidation = value => {
+  passwordValidation = (value = "") => {
     return validation.password.test(value) ? "" : errorMessages.password;
   };
 

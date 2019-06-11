@@ -25,9 +25,7 @@ const InputField = ({
         type={type}
         {...input}
       />
-      <Typography color="error">
-        {error}
-      </Typography>
+      {touched && (error && <Typography color="error">{error}</Typography>)}
     </div>
   );
 };
