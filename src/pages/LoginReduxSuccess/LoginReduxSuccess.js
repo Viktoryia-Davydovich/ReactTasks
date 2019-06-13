@@ -7,18 +7,22 @@ import styles from "./styles";
 
 import { emailSelector, passwordSelector } from "../LoginRedux/LoginReduxSelectors";
 
-class LoginReduxSuccess extends Component {
-  render() {
+const LoginReduxSuccess = ({classes}, props) => {
+
+  const prop = {
+    email: props.email,
+    password: props.password
+  };
 
     return (
-      <div className={this.classes.root}>
-      <h2 className={this.classes.title}>You have successfully logged in</h2>
-      <p className={this.classes.text}>Email: {this.email}</p>
-      <p className={this.classes.text}>Password: {this.password}</p>
+      <div className={classes.root}>
+      <h2 className={classes.title}>You have successfully logged in</h2>
+      <p className={classes.text}>Email: {prop.email}</p>
+      <p className={classes.text}>Password: {prop.password}</p>
       </div>
     )
   }
-}
+
 
 LoginReduxSuccess.propTypes = {
   password: PropTypes.string.isRequired,

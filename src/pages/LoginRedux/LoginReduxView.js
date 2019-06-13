@@ -11,12 +11,13 @@ import LoginStyles from "./LoginReduxStyles";
 const LoginForm = ({
   email,
   password,
-  errorEmail,
-  errorPassword,
+  emailError,
+  passwordError,
   onChangePassword,
   onChangeEmail,
   handleSubmit,
   classes,
+  
 }) => {
   return (
     <Container maxWidth="xs" className={classes.alignmentStyle}>
@@ -37,7 +38,7 @@ const LoginForm = ({
           value={email}
           onChange={onChangeEmail}
         />
-        <Typography color="error">{errorEmail}</Typography>
+        <Typography color="error">{emailError}</Typography>
         <TextField
           variant="outlined"
           margin="normal"
@@ -51,7 +52,7 @@ const LoginForm = ({
           value={password}
           onChange={onChangePassword}
         />
-        <Typography color="error">{errorPassword}</Typography>
+        <Typography color="error">{passwordError}</Typography>
         <Button type="submit" variant="contained" color="secondary">
           Log In
         </Button>
@@ -64,8 +65,8 @@ const LoginForm = ({
 LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  errorEmail: PropTypes.string.isRequired,
-  errorPassword: PropTypes.string.isRequired,
+  emailError: PropTypes.string.isRequired,
+  passwordError: PropTypes.string.isRequired,
   onChangeEmail: PropTypes.func.isRequired,
   onChangePassword: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired

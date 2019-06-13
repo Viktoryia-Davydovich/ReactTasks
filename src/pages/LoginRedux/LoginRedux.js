@@ -8,8 +8,8 @@ import {
   updatePassword,
   updateEmail,
   loginSuccess,
-  emailError,
-  passwordError
+  setEmailError,
+  setPasswordError
 } from "./LoginReduxActions";
 import {
   emailSelector,
@@ -36,20 +36,20 @@ class LoginRedux extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { loginSuccess, password, email, history } = this.props;
-
+    const { loginSuccess, email, password, setEmailError, setPasswordError, history } = this.props;
+    
     const errorPassword = this.validateField("password", password);
     const errorEmail = this.validateField("email", email);
 
     if (!errorPassword && !errorEmail) {
       loginSuccess();
       history.push("/login-redux/success");
-    } 
+    }
     else if (errorPassword){
-        passwordError({errorPassword});
+      setPasswordError({passwordError: errorPassword})
     }
     else if (errorEmail){
-      emailError({errorEmail});
+      setEmailError({emailError: errorEmail})
     }
   };
 
@@ -65,8 +65,8 @@ class LoginRedux extends Component {
     const props = {
       email: this.props.email,
       password: this.props.password,
-      errorEmail: this.props.errorEmail,
-      errorPassword: this.props.errorPassword,
+      emailError: this.props.emailError,
+      passwordError: this.props.passwordError,
       onChangePassword: this.onChangePassword,
       onChangeEmail: this.onChangeEmail,
       handleSubmit: this.handleSubmit
@@ -82,25 +82,25 @@ LoginRedux.propTypes = {
   errorPassword: PropTypes.string.isRequired,
   errorEmail: PropTypes.string.isRequired,
   loginSuccess: PropTypes.func.isRequired,
+  setEmailError: PropTypes.func.isRequired,
+  setPasswordError: PropTypes.func.isRequired,
   updatePassword: PropTypes.func.isRequired,
   updateEmail: PropTypes.func.isRequired,
-  passwordError: PropTypes.func.isRequired,
-  emailError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   password: passwordSelector(state),
   email: emailSelector(state),
   errorPassword: passwordErrorSelector(state),
-  errorEmail: emailErrorSelector(state)
+  errorEmail: emailErrorSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   loginSuccess: data => dispatch(loginSuccess(data)),
-  emailError: data => dispatch(emailError(data)),
-  passwordError: data => dispatch(passwordError(data)),
+  setEmailError: data => dispatch(setEmailError(data)),
+  setPasswordError: data => dispatch(setPasswordError(data)),
   updatePassword: data => dispatch(updatePassword(data)),
-  updateEmail: data => dispatch(updateEmail(data))
+  updateEmail: data => dispatch(updateEmail(data)),
 });
 
 export default connect(
