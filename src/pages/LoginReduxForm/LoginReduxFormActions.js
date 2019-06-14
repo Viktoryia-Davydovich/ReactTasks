@@ -1,3 +1,3 @@
 import { createAction } from "redux-actions";
 
-export const submitForm = createAction("SUBMIT_FORM");
+export const submitReduxForm = createAction("SUBMIT_REDUX_FORM");

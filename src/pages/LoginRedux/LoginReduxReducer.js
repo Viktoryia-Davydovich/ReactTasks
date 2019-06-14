@@ -1,32 +1,34 @@
 import { handleActions } from 'redux-actions';
-import { submitForm } from './LoginReduxActions';
+import {loginSuccess, updatePassword, updateEmail, checkEmailError, checkPasswordError } from './LoginReduxActions';
 import { combineReducers } from 'redux';
 
-const initialState = '';
+const initialState = "";
 
 const email = handleActions({
-  [submitForm]: (state, action) => (action.payload.email)
+  [updateEmail]: (state, action) => (action.payload.email)
 }, initialState);
 
 const password = handleActions({
-  [submitForm] : (state, action) => (action.payload.password)
+  [updatePassword] : (state, action) => (action.payload.password)
 }, initialState);
 
 
 const emailError = handleActions({
-  [submitForm]: (state, action) =>  (action.payload.emailError)
+  [loginSuccess]: () => (initialState),
+  [checkEmailError]: (state, action) =>  (action.payload.emailError)
 }, initialState);
 
 const passwordError = handleActions({
-  [submitForm]: (state, action) =>  (action.payload.passwordError)
+  [loginSuccess]: () => (initialState),
+  [checkPasswordError]: (state, action) =>  (action.payload.passwordError)
 }, initialState);
 
 
 const loginReduxReducers = combineReducers({
-  emailError,
   email,
-  passwordError,
-  password
+  password,
+  emailError,
+  passwordError
   }
 )
 

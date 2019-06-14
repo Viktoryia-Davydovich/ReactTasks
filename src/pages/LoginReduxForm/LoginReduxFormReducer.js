@@ -1,25 +1,25 @@
 import { combineReducers } from "redux";
 import { handleActions } from "redux-actions";
 
-import { submitForm } from "./LoginReduxFormActions";
+import { submitReduxForm } from "./LoginReduxFormActions";
 
 const initialState = "";
 
 const email = handleActions(
   {
-    [submitForm]: (state, action) => action.payload.email
+    [submitReduxForm]: (state, action) => action.payload.email
   },
   initialState
 );
 
 const password = handleActions(
   {
-    [submitForm]: (state, action) => action.payload.password
+    [submitReduxForm]: (state, action) => action.payload.password
   },
   initialState
 )
 
-let loginReduxFormReducers = combineReducers({
+const loginReduxFormReducers = combineReducers({
   email,
   password
 });

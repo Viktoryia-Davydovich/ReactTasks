@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import LoginForm from "./LoginReduxFormView";
 import { validation, errorMessages } from "../../constants/validation";
-import { submitForm } from "./LoginReduxFormActions";
+import { submitReduxForm } from "./LoginReduxFormActions";
 import { emailSelector, passwordSelector } from "./LoginReduxFormSelectors";
 
 class LoginReduxForm extends Component {
@@ -18,7 +18,7 @@ class LoginReduxForm extends Component {
   }
 
   handleSubmit = values => {
-    this.props.submitForm(values);
+    this.props.submitReduxForm(values);
     this.props.history.push("/login-redux-form/success");
   };
 
@@ -56,7 +56,7 @@ class LoginReduxForm extends Component {
 LoginReduxForm.propTypes = {
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  submitForm: PropTypes.func.isRequired
+  submitReduxForm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -65,7 +65,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  submitForm: data => dispatch(submitForm(data))
+  submitReduxForm: data => dispatch(submitReduxForm(data))
 });
 
 export default connect(

@@ -17,13 +17,12 @@ class MenuComponent extends Component {
   };
 
   render() {
-    console.log("render - MenuContainer");
 
     return (
       <Tabs
       indicatorColor="primary"
       textColor="primary"
-      value={this.value}
+      value={this.state.value}
       onChange={this.handleChange}
     >
       <Tab label="About us" to="/about" component={Link} />
