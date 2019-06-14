@@ -5,18 +5,24 @@ import { withStyles } from "@material-ui/core/styles";
 
 import styles from "./LoginReduxSuccessStyles";
 
-import { emailSelector, passwordSelector } from "../LoginRedux/LoginReduxSelectors";
+import {
+  emailSelector,
+  passwordSelector
+} from "../LoginRedux/store/LoginReduxSelectors";
 
-class LoginReduxSuccess extends Component{
-
-  render(){
+class LoginReduxSuccess extends Component {
+  render() {
     return (
       <div className={this.props.classes.root}>
-      <h2 className={this.props.classes.title}>You have successfully logged in</h2>
-      <p className={this.props.classes.text}>Email: {this.props.email}</p>
-      <p className={this.props.classes.text}>Password: {this.props.password}</p>
+        <h2 className={this.props.classes.title}>
+          You have successfully logged in
+        </h2>
+        <p className={this.props.classes.text}>Email: {this.props.email}</p>
+        <p className={this.props.classes.text}>
+          Password: {this.props.password}
+        </p>
       </div>
-    )
+    );
   }
 }
 

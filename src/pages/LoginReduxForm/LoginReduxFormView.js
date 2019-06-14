@@ -4,35 +4,10 @@ import { reduxForm, Field } from "redux-form";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 
-import LoginStyles from "./LoginReduxFormStyles";
-
-
-const InputField = ({
-  autoFocus,
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => {
-  return (
-    <div>
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        autoFocus={autoFocus}
-        label={label}
-        type={type}
-        {...input}
-      />
-      {touched && (error && <Typography color="error">{error}</Typography>)}
-    </div>
-  );
-};
+import InputField from "./LoginReduxFormViewInput";
+import LoginStyles from "./styles";
 
 const LoginForm = props => {
   const {
@@ -48,12 +23,12 @@ const LoginForm = props => {
   } = props;
 
   return (
-    <div className={classes.root}>
+    <div>
       <Container maxWidth="xs" className={classes.alignmentStyle}>
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Field
             component={InputField}
             name="email"
@@ -72,12 +47,7 @@ const LoginForm = props => {
             validate={passwordValidation}
             onChange={passwordOnChange}
           />
-          <Button
-            className={classes.button}
-            type="submit"
-            variant="contained"
-            color="default"
-          >
+          <Button type="submit" variant="contained" color="default">
             Log In
           </Button>
         </form>

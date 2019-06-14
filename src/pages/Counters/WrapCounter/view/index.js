@@ -8,11 +8,11 @@ import Counter from "../../Counter/Counter";
 
 const WrapCounterForm = ({
   label,
-  counters_count,
+  countersCount,
   counters,
-  add_counter,
-  delete_counter,
-  reset_counters,
+  addCounter,
+  deleteCounter,
+  resetCounters,
   classes
 }) => {
   const elem = counters.map(({ key }) => {
@@ -21,13 +21,13 @@ const WrapCounterForm = ({
 
   return (
     <div>
-      <Button className={classes.btnStyle} onClick={add_counter}>
+      <Button className={classes.btnStyle} onClick={addCounter}>
         new counter
       </Button>
-      <Button className={classes.btnStyle} onClick={delete_counter}>
+      <Button className={classes.btnStyle} onClick={deleteCounter}>
         delete last
       </Button>
-      <Button className={classes.delBtnStyle} onClick={reset_counters}>
+      <Button className={classes.delBtnStyle} onClick={resetCounters}>
         reset all
       </Button>
       {Array.from(Array(1), () => elem)}
@@ -36,9 +36,9 @@ const WrapCounterForm = ({
 };
 
 WrapCounterForm.propTypes = {
-  add_counter: PropTypes.func.isRequired,
-  delete_counter: PropTypes.func.isRequired,
-  reset_counters: PropTypes.func.isRequired
+  addCounter: PropTypes.func.isRequired,
+  deleteCounter: PropTypes.func.isRequired,
+  resetCounters: PropTypes.func.isRequired
 };
 
 export default withStyles(wrapCounterBtnStyles)(WrapCounterForm);

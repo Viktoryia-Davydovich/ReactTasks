@@ -4,33 +4,45 @@ import { connect } from "react-redux";
 
 import LoginForm from "./LoginReduxView";
 import { validation, errorMessages } from "../../constants/validation";
-import { updateEmail, updatePassword, loginSuccess, checkEmailError, checkPasswordError } from "./LoginReduxActions";
+import {
+  updateEmail,
+  updatePassword,
+  loginSuccess,
+  checkEmailError,
+  checkPasswordError
+} from "./store/LoginReduxActions";
 import {
   emailSelector,
   passwordSelector,
   emailErrorSelector,
-  passwordErrorSelector,
-} from "./LoginReduxSelectors";
+  passwordErrorSelector
+} from "./store/LoginReduxSelectors";
 
 class LoginRedux extends Component {
-
   validateField = (name, value) => {
     switch (name) {
-      case 'email' : 
-        return validation.email.test(value) ? '' : errorMessages.email;
-      case 'password' : 
-        return validation.password.test(value) ? '' : errorMessages.password;
+      case "email":
+        return validation.email.test(value) ? "" : errorMessages.email;
+      case "password":
+        return validation.password.test(value) ? "" : errorMessages.password;
       default:
         break;
     }
 
-    return '';
-  }
+    return "";
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    
-    const { email, password, checkEmailError, checkPasswordError, loginSuccess, history } = this.props;
+
+    const {
+      email,
+      password,
+      checkEmailError,
+      checkPasswordError,
+      loginSuccess,
+      history
+    } = this.props;
 
     const errorPassword = this.validateField("password", password);
     const errorEmail = this.validateField("email", email);
@@ -38,33 +50,32 @@ class LoginRedux extends Component {
     if (!errorPassword && !errorEmail) {
       loginSuccess();
       history.push("/login-redux/success");
-    }
-    else {
-      checkEmailError({emailError: errorEmail});
-      checkPasswordError({passwordError: errorPassword});
+    } else {
+      checkEmailError({ emailError: errorEmail });
+      checkPasswordError({ passwordError: errorPassword });
     }
   };
 
-  onChangePassword = (event) => {
+  onChangePassword = event => {
     this.props.updatePassword({ password: event.target.value });
-  }
+  };
 
-  onChangeEmail = (event) => {
+  onChangeEmail = event => {
     this.props.updateEmail({ email: event.target.value });
-  }
+  };
 
   render() {
-    const props = {
-      email: this.props.email,
-      password: this.props.password,
-      emailError: this.props.emailError,
-      passwordError: this.props.passwordError,
-      onChangePassword: this.onChangePassword,
-      onChangeEmail: this.onChangeEmail,
-      handleSubmit: this.handleSubmit
-    };
-
-    return <LoginForm {...props} />;
+    return (
+      <LoginForm
+        email={this.props.email}
+        password={this.props.password}
+        emailError={this.props.emailError}
+        passwordError={this.props.passwordError}
+        onChangePassword={this.onChangePassword}
+        onChangeEmail={this.onChangeEmail}
+        handleSubmit={this.handleSubmit}
+      />
+    );
   }
 }
 
@@ -75,14 +86,14 @@ LoginRedux.propTypes = {
   passwordError: PropTypes.string.isRequired,
   checkEmailError: PropTypes.func.isRequired,
   checkPasswordError: PropTypes.func.isRequired,
-  loginSuccess: PropTypes.func.isRequired,
+  loginSuccess: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   password: passwordSelector(state),
   email: emailSelector(state),
   passwordError: passwordErrorSelector(state),
-  emailError: emailErrorSelector(state),
+  emailError: emailErrorSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -90,7 +101,7 @@ const mapDispatchToProps = dispatch => ({
   updateEmail: data => dispatch(updateEmail(data)),
   updatePassword: data => dispatch(updatePassword(data)),
   checkPasswordError: data => dispatch(checkPasswordError(data)),
-  checkEmailError: data => dispatch(checkEmailError(data)),
+  checkEmailError: data => dispatch(checkEmailError(data))
 });
 
 export default connect(

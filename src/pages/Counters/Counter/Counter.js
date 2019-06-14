@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import CounterForm from "./view/index";
+import { thisExpression } from "@babel/types";
 
 class Counter extends Component {
   constructor(props) {
@@ -32,14 +33,14 @@ class Counter extends Component {
   };
 
   render() {
-    const props = {
-      increment: this.increment,
-      decrement: this.decrement,
-      reset: this.reset,
-      count: this.state.count
-    };
-
-    return <CounterForm {...props} />;
+    return (
+      <CounterForm
+        increment={this.increment}
+        decrement={this.decrement}
+        reset={this.reset}
+        count={this.state.count}
+      />
+    );
   }
 
   componentDidMount() {

@@ -47,16 +47,16 @@ class Login extends Component {
   };
 
   render() {
-    const props = {
-      email: this.state.email,
-      password: this.state.password,
-      errorEmail: this.state.errorEmail,
-      errorPassword: this.state.errorPassword,
-      handleChange: this.handleChange,
-      handleSubmit: this.handleSubmit
-    };
-
-    return <LoginForm {...props} />;
+    return (
+      <LoginForm
+        email={this.state.email}
+        password={this.state.password}
+        errorEmail={this.state.errorEmail}
+        errorPassword={this.state.errorPassword}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+      />
+    );
   }
 }
 

@@ -17,7 +17,7 @@ const password = handleActions(
     [submitReduxForm]: (state, action) => action.payload.password
   },
   initialState
-)
+);
 
 const loginReduxFormReducers = combineReducers({
   email,

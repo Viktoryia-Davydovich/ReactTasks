@@ -6,7 +6,7 @@ import Container from "@material-ui/core/Container";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-import LoginStyles from "./LoginReduxStyles";
+import LoginStyles from "./styles";
 
 const LoginForm = ({
   email,
@@ -16,8 +16,7 @@ const LoginForm = ({
   onChangePassword,
   onChangeEmail,
   handleSubmit,
-  classes,
-  
+  classes
 }) => {
   return (
     <Container maxWidth="xs" className={classes.alignmentStyle}>

@@ -4,8 +4,11 @@ import { connect } from "react-redux";
 
 import LoginForm from "./LoginReduxFormView";
 import { validation, errorMessages } from "../../constants/validation";
-import { submitReduxForm } from "./LoginReduxFormActions";
-import { emailSelector, passwordSelector } from "./LoginReduxFormSelectors";
+import { submitReduxForm } from "./store/LoginReduxFormActions";
+import {
+  emailSelector,
+  passwordSelector
+} from "./store/LoginReduxFormSelectors";
 
 class LoginReduxForm extends Component {
   constructor(props) {
@@ -39,17 +42,17 @@ class LoginReduxForm extends Component {
   };
 
   render() {
-    const props = {
-      email: this.state.email,
-      password: this.state.password,
-      onSubmit: this.handleSubmit,
-      emailValidation: this.emailValidation,
-      passwordValidation: this.passwordValidation,
-      emailOnChange: this.emailOnChange,
-      passwordOnChange: this.passwordOnChange
-    };
-
-    return <LoginForm {...props} />;
+    return (
+      <LoginForm
+        email={this.state.email}
+        password={this.state.password}
+        onSubmit={this.handleSubmit}
+        emailValidation={this.emailValidation}
+        passwordValidation={this.passwordValidation}
+        emailOnChange={this.emailOnChange}
+        passwordOnChange={this.passwordOnChange}
+      />
+    );
   }
 }
 

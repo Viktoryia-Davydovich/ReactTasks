@@ -7,7 +7,7 @@ class WrapCounter extends Component {
     super(props);
 
     this.state = {
-      counters_count: 1,
+      countersCount: 1,
       counters: [
         {
           key: 1
@@ -17,33 +17,33 @@ class WrapCounter extends Component {
     };
   }
 
-  add_counter = () => {
+  addCounter = () => {
     const existingsCounters = this.state.counters.slice(0);
 
     this.setState({
-      counters_count: this.state.counters_count + 1,
-      counters: [...existingsCounters, { key: this.state.counters_count + 1 }],
+      countersCount: this.state.countersCount + 1,
+      counters: [...existingsCounters, { key: this.state.countersCount + 1 }],
       label: "add"
     });
   };
 
-  delete_counter = () => {
+  deleteCounter = () => {
     const existingsCounters = this.state.counters.slice(0);
 
-    if (this.state.counters_count > 1) {
+    if (this.state.countersCount > 1) {
       this.setState({
-        counters_count: this.state.counters_count - 1,
+        countersCount: this.state.countersCount - 1,
         counters: existingsCounters.slice(0, -1),
         label: "delete"
       });
     }
   };
 
-  reset_counters = () => {
+  resetCounters = () => {
     const existingsCounters = this.state.counters.slice(0);
 
     this.setState({
-      counters_count: 1,
+      countersCount: 1,
       counters: existingsCounters.slice(0, 1),
       label: "reset"
     });
@@ -52,16 +52,16 @@ class WrapCounter extends Component {
   render() {
     console.log("render - WrapCounterContainer");
 
-    const props = {
-      label: this.state.label,
-      counters_count: this.state.counters_count,
-      counters: this.state.counters,
-      add_counter: this.add_counter,
-      delete_counter: this.delete_counter,
-      reset_counters: this.reset_counters
-    };
-
-    return <WrapCounterForm {...props} />;
+    return (
+      <WrapCounterForm
+        label={this.state.label}
+        countersCount={this.state.countersCount}
+        counters={this.state.counters}
+        addCounter={this.addCounter}
+        deleteCounter={this.deleteCounter}
+        resetCounters={this.resetCounters}
+      />
+    );
   }
 
   componentDidMount() {
