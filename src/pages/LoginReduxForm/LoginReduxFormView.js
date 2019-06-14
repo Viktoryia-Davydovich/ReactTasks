@@ -4,11 +4,35 @@ import { reduxForm, Field } from "redux-form";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
+import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 
-import LoginStyles from "./styles";
-import InputField from "../InputField";
+import LoginStyles from "./LoginReduxFormStyles";
+
+
+const InputField = ({
+  autoFocus,
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => {
+  return (
+    <div>
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        autoFocus={autoFocus}
+        label={label}
+        type={type}
+        {...input}
+      />
+      {touched && (error && <Typography color="error">{error}</Typography>)}
+    </div>
+  );
+};
 
 const LoginForm = props => {
   const {

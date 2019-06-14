@@ -3,7 +3,7 @@ import { reducer as formReducer } from "redux-form";
 import { createStore } from "redux";
 
 import loginReduxReducers from "../pages/LoginRedux/LoginReduxReducer";
-import loginReduxFormReducers from "../pages/LoginReduxForm/reducers/index";
+import loginReduxFormReducers from "../pages/LoginReduxForm/LoginReduxFormReducer";
 
 const store = createStore(combineReducers({
   loginReduxReducers,

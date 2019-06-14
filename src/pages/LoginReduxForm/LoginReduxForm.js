@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import LoginForm from "./views/LoginForm/index";
+import LoginForm from "./LoginReduxFormView";
 import { validation, errorMessages } from "../../constants/validation";
-import { submitForm } from "./actions";
-import { emailSelector, passwordSelector } from "./selectors";
+import { submitForm } from "./LoginReduxFormActions";
+import { emailSelector, passwordSelector } from "./LoginReduxFormSelectors";
 
 class LoginReduxForm extends Component {
   constructor(props) {

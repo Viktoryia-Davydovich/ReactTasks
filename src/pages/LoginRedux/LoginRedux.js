@@ -5,11 +5,7 @@ import { connect } from "react-redux";
 import LoginForm from "./LoginReduxView";
 import { validation, errorMessages } from "../../constants/validation";
 import {
-  updatePassword,
-  updateEmail,
-  loginSuccess,
-  setEmailError,
-  setPasswordError
+submitForm
 } from "./LoginReduxActions";
 import {
   emailSelector,
@@ -19,6 +15,17 @@ import {
 } from "./LoginReduxSelectors";
 
 class LoginRedux extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      password: "",
+      email: "",
+      passwordError: "",
+      emailError: ""
+    };
+  }
 
   validateField = (name, value) => {
     switch (name) {
@@ -33,40 +40,41 @@ class LoginRedux extends Component {
     return "";
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, values) => {
     event.preventDefault();
 
-    const { loginSuccess, email, password, setEmailError, setPasswordError, history } = this.props;
+    const { email, password, history } = this.props;
     
     const errorPassword = this.validateField("password", password);
     const errorEmail = this.validateField("email", email);
 
-    if (!errorPassword && !errorEmail) {
-      loginSuccess();
+    if (!errorPassword && !errorEmail) {   
       history.push("/login-redux/success");
+      this.props.submitForm(values);
+      this.props.history.push("/login-redux-form/success");
     }
     else if (errorPassword){
-      setPasswordError({passwordError: errorPassword})
+      this.setState({passwordError: errorPassword})
     }
-    else if (errorEmail){
-      setEmailError({emailError: errorEmail})
+    else {
+      this.setState({emailError: errorEmail})
     }
   };
 
-  onChangeEmail = event => {
-    this.props.updateEmail({ email: event.target.value });
+  onChangeEmail = (event) => {
+    this.setState({ email: event.target.value });
   };
 
   onChangePassword = event => {
-    this.props.updatePassword({ password: event.target.value });
+    this.setState({ password: event.target.value });
   };
 
   render() {
     const props = {
-      email: this.props.email,
-      password: this.props.password,
-      emailError: this.props.emailError,
-      passwordError: this.props.passwordError,
+      email: this.state.email,
+      password: this.state.password,
+      emailError: this.state.emailError,
+      passwordError: this.state.passwordError,
       onChangePassword: this.onChangePassword,
       onChangeEmail: this.onChangeEmail,
       handleSubmit: this.handleSubmit
@@ -79,28 +87,20 @@ class LoginRedux extends Component {
 LoginRedux.propTypes = {
   password: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  errorPassword: PropTypes.string.isRequired,
-  errorEmail: PropTypes.string.isRequired,
-  loginSuccess: PropTypes.func.isRequired,
-  setEmailError: PropTypes.func.isRequired,
-  setPasswordError: PropTypes.func.isRequired,
-  updatePassword: PropTypes.func.isRequired,
-  updateEmail: PropTypes.func.isRequired,
+  passwordError: PropTypes.string.isRequired,
+  emailError: PropTypes.string.isRequired,
+  submitForm: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   password: passwordSelector(state),
   email: emailSelector(state),
-  errorPassword: passwordErrorSelector(state),
-  errorEmail: emailErrorSelector(state),
+  passwordError: passwordErrorSelector(state),
+  emailError: emailErrorSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginSuccess: data => dispatch(loginSuccess(data)),
-  setEmailError: data => dispatch(setEmailError(data)),
-  setPasswordError: data => dispatch(setPasswordError(data)),
-  updatePassword: data => dispatch(updatePassword(data)),
-  updateEmail: data => dispatch(updateEmail(data)),
+  submitForm: data => dispatch(submitForm(data))
 });
 
 export default connect(
