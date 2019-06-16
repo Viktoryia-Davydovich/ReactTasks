@@ -11,14 +11,11 @@ import {
 } from "./store/LoginReduxFormSelectors";
 
 class LoginReduxForm extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      password: "",
-      email: ""
-    };
-  }
+  state = {
+    password: "",
+    email: ""
+  };
 
   handleSubmit = values => {
     this.props.submitReduxForm(values);

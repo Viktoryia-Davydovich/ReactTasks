@@ -3,19 +3,16 @@ import React, { Component } from "react";
 import WrapCounterForm from "./view/index";
 
 class WrapCounter extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      countersCount: 1,
-      counters: [
-        {
-          key: 1
-        }
-      ],
-      label: ""
-    };
-  }
+  state = {
+    countersCount: 1,
+    counters: [
+      {
+        key: 1
+      }
+    ],
+    label: ""
+  };
 
   addCounter = () => {
     const existingsCounters = this.state.counters.slice(0);
@@ -25,6 +22,7 @@ class WrapCounter extends Component {
       counters: [...existingsCounters, { key: this.state.countersCount + 1 }],
       label: "add"
     });
+
   };
 
   deleteCounter = () => {

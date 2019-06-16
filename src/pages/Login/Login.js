@@ -4,16 +4,12 @@ import { validation, errorMessages } from "../../constants/validation";
 import LoginForm from "./views/index";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      password: "",
-      email: "",
-      errorPassword: "",
-      errorEmail: ""
-    };
-  }
+  state = {
+    password: "",
+    email: "",
+    errorPassword: "",
+    errorEmail: ""
+  };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });

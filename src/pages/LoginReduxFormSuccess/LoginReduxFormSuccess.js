@@ -7,7 +7,7 @@ import {
   emailSelector,
   passwordSelector
 } from "../LoginReduxForm/store/LoginReduxFormSelectors";
-import styles from "./LoginReduxFormSuccessStyles";
+import styles from "./styles";
 
 class LoginReduxFormSuccess extends Component {
   render() {

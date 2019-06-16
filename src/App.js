@@ -13,7 +13,7 @@ import {
   LoginReduxSuccess,
   LoginReduxFormSuccess,
   NotFound
-} from "./pages";
+} from "./pages/";
 import MenuComponent from "./components";
 
 class App extends Component {
@@ -28,8 +28,8 @@ class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/login" component={Login} />
             <Route exact path="/login-redux" component={LoginRedux} />
-            <Route exact path="/login-redux-form" component={LoginReduxForm} />
             <Route path="/login-redux/success" component={LoginReduxSuccess} />
+            <Route exact path="/login-redux-form" component={LoginReduxForm} />
             <Route
               path="/login-redux-form/success"
               component={LoginReduxFormSuccess}

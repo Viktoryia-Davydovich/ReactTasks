@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 
 import CounterForm from "./view/index";
-import { thisExpression } from "@babel/types";
 
 class Counter extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      count: 0
-    };
+  state = {
+    count: 0
   }
 
   isCountEven = () => this.state.count % 2 === 0;

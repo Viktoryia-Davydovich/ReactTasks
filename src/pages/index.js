@@ -1,11 +1,8 @@
-import About from './About/About'
-import WrapCounter from './Counters/WrapCounter/WrapCounter'
-import Login from './Login/Login'
-import LoginRedux from './LoginRedux/LoginRedux'
-import LoginReduxForm from './LoginReduxForm/LoginReduxForm'
-import LoginReduxSuccess from './LoginReduxSuccess/LoginReduxSuccess'
-import LoginReduxFormSuccess from './LoginReduxFormSuccess/LoginReduxFormSuccess'
-import NotFound from './NotFound/NotFound'
-
-export {About, WrapCounter, Login, LoginRedux, LoginReduxForm,
-    LoginReduxSuccess, LoginReduxFormSuccess, NotFound}
+export {default as About} from './About/About'
+export {default as Login} from './Login/Login'
+export {default as LoginRedux} from './LoginRedux/LoginRedux'
+export {default as LoginReduxForm} from './LoginReduxForm/LoginReduxForm'
+export {default as WrapCounter} from './Counters/WrapCounter/WrapCounter'
+export {default as LoginReduxSuccess} from './LoginReduxSuccess/LoginReduxSuccess'
+export {default as LoginReduxFormSuccess} from './LoginReduxFormSuccess/LoginReduxFormSuccess'
+export {default as NotFound} from './NotFound/NotFound'

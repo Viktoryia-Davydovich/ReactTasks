@@ -4,13 +4,10 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 
 class MenuComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: false
-    };
-  }
+  
+  state = {
+    value: false
+  };
 
   handleChange = (event, value) => {
     this.setState({ value });

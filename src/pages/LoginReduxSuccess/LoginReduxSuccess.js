@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 
-import styles from "./LoginReduxSuccessStyles";
+import styles from "./styles";
 
 import {
   emailSelector,
