@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import LoginForm from "./LoginReduxView";
 import { validation, errorMessages } from "../../constants/validation";
@@ -18,6 +18,8 @@ import {
   emailErrorSelector,
   passwordErrorSelector
 } from "./store/LoginReduxSelectors";
+
+import { LoginReduxSuccess } from "../index";
 
 class LoginRedux extends Component {
   validateField = (name, value) => {
@@ -50,6 +52,7 @@ class LoginRedux extends Component {
 
     if (!errorPassword && !errorEmail) {
       loginSuccess();
+      console.log(this.props.location);
       history.push("/login-redux/success");
     } else {
       checkEmailError({ emailError: errorEmail });
@@ -67,15 +70,18 @@ class LoginRedux extends Component {
 
   render() {
     return (
-      <LoginForm
-        email={this.props.email}
-        password={this.props.password}
-        emailError={this.props.emailError}
-        passwordError={this.props.passwordError}
-        onChangePassword={this.onChangePassword}
-        onChangeEmail={this.onChangeEmail}
-        handleSubmit={this.handleSubmit}
-      />
+      <div>
+        <LoginForm
+          email={this.props.email}
+          password={this.props.password}
+          emailError={this.props.emailError}
+          passwordError={this.props.passwordError}
+          onChangePassword={this.onChangePassword}
+          onChangeEmail={this.onChangeEmail}
+          handleSubmit={this.handleSubmit}
+        />
+        <Route path="/login-redux/success" component={LoginReduxSuccess} />
+      </div>
     );
   }
 }
