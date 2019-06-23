@@ -1,75 +1,73 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { reduxForm, Field } from "redux-form";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-
-import InputField from "./LoginReduxFormViewInput";
 import LoginStyles from "./styles";
 
-const LoginForm = props => {
-  const {
-    email,
-    password,
-    emailOnChange,
-    passwordOnChange,
-    emailValidation,
-    passwordValidation,
-    onSubmit,
-    classes,
-    handleSubmit
-  } = props;
-
+const LoginForm = ({
+  email,
+  password,
+  onChange,
+  onSubmit,
+  errors,
+  classes
+}) => {
   return (
-    <div>
-      <Container maxWidth="xs" className={classes.alignmentStyle}>
-        <Typography component="h1" variant="h5">
+    <Container maxWidth="xs" className={classes.alignmentStyle}>
+      <Typography component="h1" variant="h5">
+        Log in
+      </Typography>
+      <form onSubmit={onSubmit}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          value={email}
+          onChange={onChange}
+        />
+        {errors.email && <Typography color="error">{errors.email}</Typography>}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={onChange}
+        />
+        {errors.password && (
+          <Typography color="error">{errors.password}</Typography>
+        )}
+        <Button type="submit" variant="contained" color="secondary">
           Log in
-        </Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Field
-            component={InputField}
-            name="email"
-            type="email"
-            autoFocus={true}
-            label="Email Address"
-            validate={emailValidation}
-            onChange={emailOnChange}
-          />
-          <Field
-            component={InputField}
-            name="password"
-            type="password"
-            autoFocus={false}
-            label="Password"
-            validate={passwordValidation}
-            onChange={passwordOnChange}
-          />
-          <Button type="submit" variant="contained" color="default">
-            Log In
-          </Button>
-        </form>
-        <pre>{JSON.stringify({ email, password })}</pre>
-      </Container>
-    </div>
+        </Button>
+      </form>
+    </Container>
   );
 };
-
+/*
 LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  emailValidation: PropTypes.func.isRequired,
-  passwordValidation: PropTypes.func.isRequired,
-  emailOnChange: PropTypes.func.isRequired,
-  passwordOnChange: PropTypes.func.isRequired
+  emailError: PropTypes.string.isRequired,
+  passwordError: PropTypes.string.isRequired,
+  onChangeEmail: PropTypes.func.isRequired,
+  onChangePassword: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 };
-
-const LoginFormWithStyle = withStyles(LoginStyles)(LoginForm);
-
-export default reduxForm({
-  form: "login"
-})(LoginFormWithStyle);
+*/
+export default withStyles(LoginStyles)(LoginForm);

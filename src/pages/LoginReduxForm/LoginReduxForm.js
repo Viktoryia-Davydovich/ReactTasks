@@ -1,59 +1,66 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
 
+import { loginUser } from "../../store/actions/authentication";
 import LoginForm from "./LoginReduxFormView";
-import { validation, errorMessages } from "../../constants/validation";
-import { submitReduxForm } from "./store/LoginReduxFormActions";
-import {
-  emailSelector,
-  passwordSelector
-} from "./store/LoginReduxFormSelectors";
-import { LoginReduxFormSuccess } from "../index";
 
 class LoginReduxForm extends Component {
-  state = {
-    password: "",
-    email: ""
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      errors: {}
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    this.props.loginUser(user);
   };
 
-  handleSubmit = values => {
-    this.props.submitReduxForm(values);
-    this.props.history.push("/login-redux-form/success");
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
-  emailValidation = (value = "") => {
-    return validation.email.test(value) ? "" : errorMessages.email;
-  };
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
 
-  passwordValidation = (value = "") => {
-    return validation.password.test(value) ? "" : errorMessages.password;
-  };
-
-  emailOnChange = (event, value) => {
-    this.setState({ email: value });
-  };
-
-  passwordOnChange = (event, value) => {
-    this.setState({ password: value });
-  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
 
   render() {
+    const { errors } = this.state;
     return (
       <div>
         <LoginForm
           email={this.state.email}
           password={this.state.password}
           onSubmit={this.handleSubmit}
-          emailValidation={this.emailValidation}
-          passwordValidation={this.passwordValidation}
-          emailOnChange={this.emailOnChange}
-          passwordOnChange={this.passwordOnChange}
-        />
-        <Route
-          path="/login-redux-form/success"
-          component={LoginReduxFormSuccess}
+          onChange={this.handleChange}
+          errors={errors}
         />
       </div>
     );
@@ -61,21 +68,17 @@ class LoginReduxForm extends Component {
 }
 
 LoginReduxForm.propTypes = {
-  password: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  submitReduxForm: PropTypes.func.isRequired
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  email: emailSelector(state),
-  password: passwordSelector(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  submitReduxForm: data => dispatch(submitReduxForm(data))
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { loginUser }
 )(LoginReduxForm);

@@ -1,16 +1,9 @@
-import { combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers";
 
-import loginReduxReducers from "../pages/LoginRedux/store/LoginReduxReducer";
-import loginReduxFormReducers from "../pages/LoginReduxForm/store/LoginReduxFormReducers";
+const inititalState = {};
 
-const store = createStore(
-  combineReducers({
-    loginReduxReducers,
-    loginReduxFormReducers,
-    form: formReducer
-  })
-);
+const store = createStore(rootReducer, inititalState, applyMiddleware(thunk));
 
 export default store;
