@@ -53,7 +53,7 @@ const LoginForm = ({
         />
         <Typography color="error">{passwordError}</Typography>
         <Button type="submit" variant="contained" color="secondary">
-          Log In
+          Register
         </Button>
       </form>
       <pre>{JSON.stringify({ email, password })}</pre>
