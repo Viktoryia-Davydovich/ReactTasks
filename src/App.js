@@ -28,25 +28,23 @@ if (localStorage.jwtToken) {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <MenuComponent />
-          <Switch>
-            <Route exact path="/" />
-            <Route path="/counters" component={WrapCounter} />
-            <Route path="/about" component={About} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={LoginReduxForm} />
-            <Route path="/404" component={NotFound} />
-            <Route component={() => <Redirect from="*" to="/404" />} />
-          </Switch>
-        </Router>
-      </Provider>
-    );
-  }
+function App() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <MenuComponent />
+        <Switch>
+          <Route exact path="/" />
+          <Route path="/counters" component={WrapCounter} />
+          <Route path="/about" component={About} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={LoginReduxForm} />
+          <Route path="/404" component={NotFound} />
+          <Route component={() => <Redirect from="*" to="/404" />} />
+        </Switch>
+      </Router>
+    </Provider>
+  );
 }
 
 export default App;
