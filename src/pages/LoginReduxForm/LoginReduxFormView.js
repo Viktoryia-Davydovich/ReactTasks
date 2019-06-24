@@ -11,7 +11,8 @@ import LoginStyles from "./styles";
 const LoginForm = ({
   email,
   password,
-  onChange,
+  onEmailChange,
+  onPasswordChange,
   onSubmit,
   errors,
   classes
@@ -33,7 +34,7 @@ const LoginForm = ({
           autoComplete="email"
           autoFocus
           value={email}
-          onChange={onChange}
+          onChange={onEmailChange}
         />
         {errors.email && <Typography color="error">{errors.email}</Typography>}
         <TextField
@@ -47,7 +48,7 @@ const LoginForm = ({
           id="password"
           autoComplete="current-password"
           value={password}
-          onChange={onChange}
+          onChange={onPasswordChange}
         />
         {errors.password && (
           <Typography color="error">{errors.password}</Typography>
