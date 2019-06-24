@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
@@ -6,65 +6,49 @@ import { withRouter } from "react-router-dom";
 import { registerUser } from "../../store/actions/authentication";
 import LoginForm from "./RegisterView";
 
-class Register extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {}
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+const Register = props => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  onChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     const user = {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password
     };
 
-    this.props.registerUser(user, this.props.history);
+    props.registerUser(user, props.history);
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
-    }
-  }
+  const handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
-  }
+  const handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
 
-  render() {
-    const { errors } = this.state;
-    return (
-      <LoginForm
-        email={this.state.email}
-        password={this.state.password}
-        onChange={this.onChange}
-        onSubmit={this.handleSubmit}
-        errors={errors}
-      />
-    );
-  }
-}
+  useEffect(() => {
+    if (props.auth.isAuthenticated) {
+      props.history.push("/");
+    } else {
+      setErrors({ errors });
+    }
+  }, [props.auth.isAuthenticated, props.history, errors]);
+
+  return (
+    <LoginForm
+      email={email}
+      password={password}
+      onSubmit={handleSubmit}
+      onEmailChange={handleEmailChange}
+      onPasswordChange={handlePasswordChange}
+      errors={errors}
+    />
+  );
+};
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
