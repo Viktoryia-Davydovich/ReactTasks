@@ -1,5 +1,5 @@
 const white = "#FFFFFF";
-const black = "#696c70";
+const black = "#979998";
 
 const themeLight = {
   background: white,
