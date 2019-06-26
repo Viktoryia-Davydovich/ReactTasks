@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Redirect } from "react-router";
 import { Provider } from "react-redux";
-import jwt_decode from "jwt-decode";
 import Button from "@material-ui/core/Button";
 
-import setAuthToken from "./store/setAuthToken";
-import { setCurrentUser, logoutUser } from "./store/actions/authentication";
+import { useTheme } from "./components/themeSwitch";
 import store from "./store/store";
+import Menu from "./components/Menu";
+import Wrapper from "./components/Wrapper";
 import {
   About,
   WrapCounter,
@@ -15,31 +15,6 @@ import {
   LoginReduxForm,
   NotFound
 } from "./pages/";
-import MenuComponent from "./components";
-import styled from "@emotion/styled";
-import { useTheme } from "./components/themeSwitch";
-
-if (localStorage.jwtToken) {
-  setAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(decoded));
-
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    store.dispatch(logoutUser());
-    window.location.href = "/login";
-  }
-}
-
-const Wrapper = styled("div")`
-  background: ${props => props.theme.background};
-  width: 100vw;
-  height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen";
-  h1 {
-    color: ${props => props.theme.body};
-  }
-`;
 
 function App() {
   const themeState = useTheme();
@@ -56,7 +31,7 @@ function App() {
               {themeState.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             </Button>
           </div>
-          <MenuComponent />
+          <Menu />
           <Switch>
             <Route exact path="/" />
             <Route path="/counters" component={WrapCounter} />
