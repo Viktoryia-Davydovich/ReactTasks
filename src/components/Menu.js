@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import { logoutUser } from "../store/actions/authentication";
 
-const MenuComponent = props => {
+const Menu = props => {
   const [value, setValue] = React.useState("");
 
   const onLogout = event => {
@@ -54,7 +54,7 @@ const MenuComponent = props => {
   return <div>{isAuthenticated ? authLinks : guestLinks}</div>;
 };
 
-MenuComponent.propTypes = {
+Menu.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -66,4 +66,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { logoutUser }
-)(withRouter(MenuComponent));
+)(withRouter(Menu));
