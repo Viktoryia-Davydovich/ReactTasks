@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
@@ -10,17 +10,15 @@ const Register = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const { doRegisterUser } = props;
 
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    const user = {
-      email: email,
-      password: password
-    };
-
-    props.registerUser(user, props.history);
-  };
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      doRegisterUser({ email, password }, props.history);
+    },
+    [email, password, props.history, doRegisterUser]
+  );
 
   const handleEmailChange = event => {
     setEmail(event.target.value);
