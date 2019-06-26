@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -6,6 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Button from "@material-ui/core/Button";
 
+import { useTheme } from "./themeSwitch";
 import { logoutUser } from "../store/actions/authentication";
 
 const Menu = props => {
@@ -51,7 +52,20 @@ const Menu = props => {
     </Tabs>
   );
 
-  return <div>{isAuthenticated ? authLinks : guestLinks}</div>;
+  const themeState = useTheme();
+
+  return (
+    <div style={{ padding: "15px" }}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => themeState.toggle()}
+      >
+        {themeState.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      </Button>
+      {isAuthenticated ? authLinks : guestLinks}
+    </div>
+  );
 };
 
 Menu.propTypes = {
