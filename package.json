@@ -37,7 +37,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "https://glacial-ridge-25101.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
