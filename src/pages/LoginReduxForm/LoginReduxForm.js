@@ -9,15 +9,17 @@ const LoginReduxForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { doLoginUser } = props;
 
-  const handleSubmit = useCallback(
-    event => {
-      event.preventDefault();
-      doLoginUser({ email, password });
-    },
-    [email, password, doLoginUser]
-  );
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      email: email,
+      password: password
+    };
+
+    props.loginUser(user);
+  };
 
   const handleEmailChange = event => {
     setEmail(event.target.value);
