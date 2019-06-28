@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ThemeProvider } from "./components/themeSwitch";
 import { Provider } from "react-redux";
 
 import store from "./store/store";
 import App from "./App";
+import { ThemeProvider } from "./components/themeSwitch";
 
 ReactDOM.render(
   <ThemeProvider>
