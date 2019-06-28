@@ -12,7 +12,6 @@ const LoginReduxForm = props => {
   const [errorsLogin, setErrorsLogin] = useState({});
 
   const doLoginUser = props.loginUser;
-  console.log(props);
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();

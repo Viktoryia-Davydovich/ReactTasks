@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -11,8 +11,6 @@ import { logoutUser } from "../store/actions/authentication";
 import { setTab } from "../store/actions/types";
 
 const Menu = props => {
-  /*const [tab, setTab] = useState(0);*/
-
   const handleChange = (event, tab) => {
     props.setTab({ tab: tab });
   };

@@ -14,7 +14,7 @@ import {
 } from "./pages/";
 
 function App(props) {
-  const { isAuthenticated, user } = props.auth;
+  const { isAuthenticated } = props.auth;
 
   if (isAuthenticated) {
     debugger;
