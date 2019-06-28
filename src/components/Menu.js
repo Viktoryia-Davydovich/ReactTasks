@@ -8,33 +8,29 @@ import Button from "@material-ui/core/Button";
 
 import { useTheme } from "./themeSwitch";
 import { logoutUser } from "../store/actions/authentication";
+import { setTab } from "../store/actions/types";
 
 const Menu = props => {
-  /*
-  const [tab, setTab] = useState(0);
-*/
+  /*const [tab, setTab] = useState(0);*/
+
+  const handleChange = (event, tab) => {
+    props.setTab({ tab: tab });
+  };
+
   const onLogout = event => {
     event.preventDefault();
     props.logoutUser(props.history);
   };
-  /*
-  const handleChange = (event, tab) => {
-    setTab(tab);
-  };
-*/
+
   const { isAuthenticated, user } = props.auth;
-  console.log(props.changeTab);
-  debugger;
-  const { actTab } = props.tab;
-  const changeTab = props.changeTab;
 
   const authLinks = (
     <div>
       <Tabs
         indicatorColor="primary"
         textColor="primary"
-        value={actTab}
-        onChange={changeTab}
+        value={props.tab}
+        onChange={handleChange}
       >
         <Tab label="About us" to="/about" component={Link} />
         <Tab label="Counters" to="/counters" component={Link} />
@@ -49,8 +45,8 @@ const Menu = props => {
     <Tabs
       indicatorColor="primary"
       textColor="primary"
-      value={actTab}
-      onChange={changeTab}
+      value={props.tab}
+      onChange={handleChange}
     >
       <Tab label="Register" to="/register" component={Link} />
       <Tab label="Log in" to="/login" component={Link} />
@@ -83,7 +79,12 @@ const mapStateToProps = state => ({
   tab: state.tab
 });
 
+const mapDispatchToProps = dispatch => ({
+  logoutUser: data => dispatch(logoutUser(data)),
+  setTab: data => dispatch(setTab(data))
+});
+
 export default connect(
   mapStateToProps,
-  { logoutUser, changeTab }
+  mapDispatchToProps
 )(withRouter(Menu));

@@ -1,10 +1,13 @@
-import { SET_TAB } from "../actions/types";
+import { setTab } from "../actions/types";
+import { handleActions } from "redux-actions";
 
-export default function actTab(state = 0, action = {}) {
-  switch (action.type) {
-    case SET_TAB:
-      return action.index;
-    default:
-      return state;
-  }
-}
+const initialState = 0;
+
+const tabReducer = handleActions(
+  {
+    [setTab]: (state, action) => action.payload.tab
+  },
+  initialState
+);
+
+export default tabReducer;

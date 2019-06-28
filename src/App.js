@@ -12,8 +12,6 @@ import {
   LoginReduxForm,
   NotFound
 } from "./pages/";
-import { changeTab } from "./store/actions/setTab";
-import store from "./store/store";
 
 function App(props) {
   const { isAuthenticated, user } = props.auth;
@@ -44,20 +42,8 @@ function App(props) {
         <Menu />
         <Switch>
           <Route exact path="/" />
-          <Route
-            path="/register"
-            component={Register}
-            render={() => {
-              store.dispatch(changeTab(0));
-            }}
-          />
-          <Route
-            path="/login"
-            component={LoginReduxForm}
-            render={() => {
-              store.dispatch(changeTab(1));
-            }}
-          />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={LoginReduxForm} />
           <Route path="/404" component={NotFound} />
           <Route component={() => <Redirect from="*" to="/login" />} />
         </Switch>
