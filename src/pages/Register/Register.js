@@ -33,7 +33,7 @@ const Register = props => {
   useEffect(() => {
     if (props.auth.isAuthenticated) {
       props.history.push("/");
-    } else {
+    } else if (props.errors) {
       setErrors(props.errors);
     }
   }, [props.auth.isAuthenticated, props.history, props.errors]);

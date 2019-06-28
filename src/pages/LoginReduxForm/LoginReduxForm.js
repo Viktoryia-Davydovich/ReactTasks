@@ -8,7 +8,7 @@ import LoginForm from "./LoginReduxFormView";
 const LoginReduxForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errorsLogin, setErrorsLogin] = useState({});
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -32,10 +32,10 @@ const LoginReduxForm = props => {
   useEffect(() => {
     if (props.auth.isAuthenticated) {
       props.history.push("/");
-    } else {
-      setErrors(props.errors);
+    } else if (props.errorsLogin) {
+      setErrorsLogin(props.errorsLogin);
     }
-  }, [props.auth.isAuthenticated, props.history, props.errors]);
+  }, [props.auth.isAuthenticated, props.history, props.errorsLogin]);
 
   return (
     <LoginForm
@@ -44,7 +44,7 @@ const LoginReduxForm = props => {
       onSubmit={handleSubmit}
       onEmailChange={handleEmailChange}
       onPasswordChange={handlePasswordChange}
-      errors={errors}
+      errors={errorsLogin}
     />
   );
 };
@@ -52,12 +52,12 @@ const LoginReduxForm = props => {
 LoginReduxForm.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errorsLogin: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errorsLogin: state.errorsLogin
 });
 
 export default connect(
