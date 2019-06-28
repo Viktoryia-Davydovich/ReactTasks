@@ -10,24 +10,23 @@ const LoginReduxForm = props => {
   const [password, setPassword] = useState("");
   const [errorsLogin, setErrorsLogin] = useState({});
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const doLoginUser = props.loginUser;
 
-    const user = {
-      email: email,
-      password: password
-    };
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      doLoginUser({ email, password });
+    },
+    [email, password, doLoginUser]
+  );
 
-    props.loginUser(user);
-  };
-
-  const handleEmailChange = event => {
+  const handleEmailChange = useCallback(event => {
     setEmail(event.target.value);
-  };
+  }, []);
 
-  const handlePasswordChange = event => {
+  const handlePasswordChange = useCallback(event => {
     setPassword(event.target.value);
-  };
+  }, []);
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {

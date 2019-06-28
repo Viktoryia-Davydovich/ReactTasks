@@ -11,16 +11,16 @@ const Register = props => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const doRegisterUser = props.registerUser;
+  const hist = props.history;
 
-    const user = {
-      email: email,
-      password: password
-    };
-
-    props.registerUser(user, props.history);
-  };
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      doRegisterUser({ email, password }, hist);
+    },
+    [email, password, doRegisterUser, hist]
+  );
 
   const handleEmailChange = event => {
     setEmail(event.target.value);
