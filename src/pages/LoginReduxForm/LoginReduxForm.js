@@ -38,16 +38,14 @@ const LoginReduxForm = props => {
   }, [props.auth.isAuthenticated, props.history, props.errors]);
 
   return (
-    <div>
-      <LoginForm
-        email={email}
-        password={password}
-        onSubmit={handleSubmit}
-        onEmailChange={handleEmailChange}
-        onPasswordChange={handlePasswordChange}
-        errors={errors}
-      />
-    </div>
+    <LoginForm
+      email={email}
+      password={password}
+      onSubmit={handleSubmit}
+      onEmailChange={handleEmailChange}
+      onPasswordChange={handlePasswordChange}
+      errors={errors}
+    />
   );
 };
 
