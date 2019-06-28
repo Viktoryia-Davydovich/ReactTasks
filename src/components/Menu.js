@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -10,15 +10,21 @@ import { useTheme } from "./themeSwitch";
 import { logoutUser } from "../store/actions/authentication";
 
 const Menu = props => {
-  const [value, setValue] = React.useState("");
+  const [tab, setTab] = useState(0);
+
+  const defaultTab = 0;
+  const tabContext = React.createContext(defaultTab);
+  const useSwitchTab = () => React.useContext(tabContext);
+
+  const TabSwitchProvider = ({ children }) => {};
 
   const onLogout = event => {
     event.preventDefault();
     props.logoutUser(props.history);
   };
 
-  const handleChange = (event, value) => {
-    setValue(value);
+  const handleChange = (event, tab) => {
+    setTab(tab);
   };
 
   const { isAuthenticated, user } = props.auth;
@@ -28,7 +34,7 @@ const Menu = props => {
       <Tabs
         indicatorColor="primary"
         textColor="primary"
-        value={value}
+        value={tab}
         onChange={handleChange}
       >
         <Tab label="About us" to="/about" component={Link} />
@@ -44,7 +50,7 @@ const Menu = props => {
     <Tabs
       indicatorColor="primary"
       textColor="primary"
-      value={value}
+      value={tab}
       onChange={handleChange}
     >
       <Tab label="Register" to="/register" component={Link} />

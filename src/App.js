@@ -17,6 +17,7 @@ function App(props) {
   const { isAuthenticated, user } = props.auth;
 
   if (isAuthenticated) {
+    debugger;
     return (
       <Wrapper>
         <Router>

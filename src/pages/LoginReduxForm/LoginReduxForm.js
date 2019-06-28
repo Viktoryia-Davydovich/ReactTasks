@@ -56,7 +56,8 @@ LoginReduxForm.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errorsLogin: state.errorsLogin
+  errorsLogin: state.errorsLogin,
+  tab: state.tab
 });
 
 export default connect(
