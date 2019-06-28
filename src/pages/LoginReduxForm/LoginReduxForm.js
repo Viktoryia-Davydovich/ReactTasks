@@ -35,7 +35,7 @@ const LoginReduxForm = props => {
     } else {
       setErrors(props.errors);
     }
-  }, [props.auth.isAuthenticated, props.history, errors]);
+  }, [props.auth.isAuthenticated, props.history, props.errors]);
 
   return (
     <div>
