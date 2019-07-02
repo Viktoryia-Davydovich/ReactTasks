@@ -9,14 +9,15 @@ const NoteList = props => {
         key={note.id}
         title={note.title}
         note={note.content}
-        tag={note.tag}
         updDate={`${new Date(note.updatedDate)
           .toISOString()
           .slice(0, 10)} ${new Date(note.updatedDate)
           .toISOString()
           .slice(11, 16)}`}
+        tag={note.tag}
         editNote={() => props.onOpenEditNoteModal(note.id)}
         deleteNote={() => props.onDeleteNote(note.id)}
+        setPrivacy={() => props.onChangePrivacy(note.tag)}
       />
     );
   });
