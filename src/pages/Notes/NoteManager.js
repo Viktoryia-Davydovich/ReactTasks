@@ -80,18 +80,6 @@ class NoteManager extends Component {
 
     const { title, content, tag } = note;
 
-    if (!title || title.length === 0) {
-      throw Error("Title is required");
-    }
-
-    if (!content || content.length === 0) {
-      throw Error("Content is required");
-    }
-
-    if (!Array.isArray(tag)) {
-      throw Error("Tags must be an array");
-    }
-
     NoteService.addNote(title, content, tag)
       .then(newNote => {
         NoteService.listNotes()
