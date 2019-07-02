@@ -32,6 +32,7 @@ const Menu = props => {
       >
         <Tab label="About us" to="/about" component={Link} />
         <Tab label="Counters" to="/counters" component={Link} />
+        <Tab label="Notes" to="/notes" component={Link} />
         <Button variant="contained" color="secondary" onClick={onLogout}>
           Logout
         </Button>
@@ -48,6 +49,7 @@ const Menu = props => {
     >
       <Tab label="Register" to="/register" component={Link} />
       <Tab label="Log in" to="/login" component={Link} />
+      <Tab label="Notes" to="/notes" component={Link} />
     </Tabs>
   );
 
