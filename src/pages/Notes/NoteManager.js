@@ -5,7 +5,7 @@ import NoteAdd from "./NoteAdd";
 import NoteEdit from "./NoteEdit";
 import NoteList from "./NoteList";
 
-const NoteService = require("../../store/actions/NoteService");
+import { NoteService } from "../../store/actions/NoteService";
 
 class NoteManager extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class NoteManager extends Component {
     this.handleAddNote = this.handleAddNote.bind(this);
     this.handleEditNote = this.handleEditNote.bind(this);
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
-    this.handleSetPrivacyNote = this.handleSetPrivacyNote.bind(this);
+    this.handleChangePrivacy = this.handleChangePrivacy.bind(this);
 
     this.handleOpenAddNoteModal = this.handleOpenAddNoteModal.bind(this);
     this.handleCloseAddNoteModal = this.handleCloseAddNoteModal.bind(this);

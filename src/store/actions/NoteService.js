@@ -80,7 +80,7 @@ const updateNote = note => {
   });
 };
 
-module.exports = {
+export const NoteService = {
   addNote: addNote,
   findNote: findNote,
   listNotes: listNotes,
