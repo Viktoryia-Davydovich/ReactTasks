@@ -10,6 +10,7 @@ import {
   WrapCounter,
   Register,
   LoginReduxForm,
+  Notes,
   NotFound
 } from "./pages/";
 
@@ -26,6 +27,7 @@ function App(props) {
             <Route exact path="/" />
             <Route path="/counters" component={WrapCounter} />
             <Route path="/about" component={About} />
+            <Route path="/notes" component={Notes} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={LoginReduxForm} />
             <Route path="/404" component={NotFound} />
@@ -44,6 +46,7 @@ function App(props) {
           <Route exact path="/" />
           <Route path="/register" component={Register} />
           <Route path="/login" component={LoginReduxForm} />
+          <Route path="/notes" component={Notes} />
           <Route path="/404" component={NotFound} />
           <Route component={() => <Redirect from="*" to="/login" />} />
         </Switch>
