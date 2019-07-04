@@ -176,7 +176,7 @@ class NoteManager extends Component {
             type="button"
             onClick={this.handleOpenAddNoteModal}
           >
-            <i className="fa fa-plus"></i>
+            <i className="fa fa-plus">Add note</i>
           </button>
         </div>
         <NoteList
