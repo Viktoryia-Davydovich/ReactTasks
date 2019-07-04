@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 class AddNoteForm extends Component {
   constructor(props) {
@@ -68,12 +70,15 @@ class AddNoteForm extends Component {
             ></textarea>
           </div>
           <div className="form-group">
-            <label htmlFor="tags">Tags</label>
-            <input
-              type="text"
-              className="form-control"
-              name="tags"
-              onChange={this.onTagsChange}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={false}
+                  onChange={this.onTagsChange}
+                  value="private"
+                />
+              }
+              label="Private"
             />
           </div>
           <div className="form-group row">
