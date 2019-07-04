@@ -10,7 +10,7 @@ class AddNoteForm extends Component {
     this.state = {
       title: "",
       content: "",
-      tag: false
+      tag: true
     };
 
     this.onTitleChange = this.onTitleChange.bind(this);
@@ -73,7 +73,7 @@ class AddNoteForm extends Component {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={false}
+                  checked={this.tag}
                   onChange={this.onTagChange}
                   value="private"
                 />
