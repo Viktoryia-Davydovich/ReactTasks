@@ -74,7 +74,7 @@ class AddNoteForm extends Component {
               control={
                 <Checkbox
                   checked={false}
-                  onChange={this.onTagsChange}
+                  onChange={this.onTagChange}
                   value="private"
                 />
               }
