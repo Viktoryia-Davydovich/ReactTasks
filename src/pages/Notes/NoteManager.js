@@ -85,7 +85,7 @@ class NoteManager extends Component {
         NoteService.listNotes()
           .then(notes => {
             notes.forEach(n =>
-              n.id === newNote.id ? (n.isNew = "true") : (n.isNew = undefined)
+              n._id === newNote._id ? (n.isNew = "true") : (n.isNew = undefined)
             );
             this.setState({ notes });
           })

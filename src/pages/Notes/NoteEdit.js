@@ -6,7 +6,7 @@ class EditNoteForm extends Component {
     super(props);
 
     this.state = {
-      id: props.note.id,
+      _id: props.note._id,
       title: props.note.title,
       content: props.note.content,
       tag: props.note.tag

@@ -2,13 +2,13 @@ import * as axios from "axios";
 
 const baseApiUrl = "https://glacial-ridge-25101.herokuapp.com/api/notes";
 
-const addNote = (title, content, privacy) => {
+const addNote = (title, content, tag) => {
   return new Promise((resolve, reject) => {
     axios
       .post(`${baseApiUrl}/add`, {
         title: title,
         content: content,
-        privacy: privacy
+        tag: tag
       })
       .then(result => {
         resolve(result.data);
@@ -20,10 +20,10 @@ const addNote = (title, content, privacy) => {
   });
 };
 
-const findNote = id => {
+const listNotes = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${baseApiUrl}/${id}`)
+      .get(`${baseApiUrl}/`)
       .then(response => {
         resolve(response.data);
         return;
@@ -35,10 +35,10 @@ const findNote = id => {
   });
 };
 
-const listNotes = () => {
+const findNote = id => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${baseApiUrl}/`)
+      .get(`${baseApiUrl}/${id}`)
       .then(response => {
         resolve(response.data);
         return;
