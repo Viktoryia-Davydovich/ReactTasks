@@ -1,6 +1,6 @@
 import * as axios from "axios";
 
-const baseApiUrl = "https://glacial-ridge-25101.herokuapp.com/api";
+const baseApiUrl = "https://glacial-ridge-25101.herokuapp.com/api/notes";
 
 const addNote = (title, content, privacy) => {
   return new Promise((resolve, reject) => {
