@@ -5,7 +5,7 @@ const baseApiUrl = "https://glacial-ridge-25101.herokuapp.com/api/notes";
 const addNote = (title, content, privacy) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${baseApiUrl}/notes`, {
+      .post(`${baseApiUrl}/add`, {
         title: title,
         content: content,
         privacy: privacy
@@ -23,7 +23,7 @@ const addNote = (title, content, privacy) => {
 const findNote = id => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${baseApiUrl}/notes/${id}`)
+      .get(`${baseApiUrl}/${id}`)
       .then(response => {
         resolve(response.data);
         return;
@@ -38,7 +38,7 @@ const findNote = id => {
 const listNotes = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${baseApiUrl}/notes`)
+      .get(`${baseApiUrl}/`)
       .then(response => {
         resolve(response.data);
         return;
@@ -53,7 +53,7 @@ const listNotes = () => {
 const removeNote = id => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(`${baseApiUrl}/notes/${id}`)
+      .delete(`${baseApiUrl}/${id}`)
       .then(() => {
         resolve();
         return;
@@ -68,7 +68,7 @@ const removeNote = id => {
 const updateNote = note => {
   return new Promise((resolve, reject) => {
     axios
-      .put(`${baseApiUrl}/notes`, { note })
+      .put(`${baseApiUrl}/`, { note })
       .then(() => {
         resolve();
         return;
