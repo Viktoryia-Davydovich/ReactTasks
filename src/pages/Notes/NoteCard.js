@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 import NotesStyles from "./styles";
+import { notEqual } from "assert";
 
 const NoteCard = props => {
   const {
@@ -23,6 +24,9 @@ const NoteCard = props => {
     editNote,
     deleteNote,
     changePrivacy,
+    auth,
+    user,
+    noteAuthor,
     classes
   } = props;
 
@@ -40,44 +44,61 @@ const NoteCard = props => {
     });
   };
 
-  return (
-    <Card className={classes.cardStyle}>
-      <CardContent>
-        <Typography variant="h3" component="h2">
-          {title}
-        </Typography>
-        <Typography>{content}</Typography>
-        <div>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={tag}
-                onChange={handleChangeTag}
-                value="private"
-              />
-            }
-            label="Private"
-          />
-        </div>
-        <div className="align-middle">Created: {createDate}</div>
-        <div className="align-middle">Updated: {updDate}</div>
-      </CardContent>
-      <CardActions>
-        <span>
-          <Button variant="contained" color="primary" onClick={editNote}>
-            Edit
-            <CreateIcon />
-          </Button>
-        </span>
-        <span>
-          <Button variant="contained" color="secondary" onClick={deleteNote}>
-            Delete
-            <DeleteIcon />
-          </Button>
-        </span>
-      </CardActions>
-    </Card>
-  );
+  if (auth && user == noteAuthor) {
+    return (
+      <Card className={classes.cardStyle}>
+        <CardContent>
+          <Typography variant="h3" component="h2">
+            {title}
+          </Typography>
+          <Typography>{content}</Typography>
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={tag}
+                  onChange={handleChangeTag}
+                  value="private"
+                />
+              }
+              label="Private"
+            />
+          </div>
+          <div className="align-middle">Created: {createDate}</div>
+          <div className="align-middle">Updated: {updDate}</div>
+        </CardContent>
+        <CardActions>
+          <span>
+            <Button variant="contained" color="primary" onClick={editNote}>
+              Edit
+              <CreateIcon />
+            </Button>
+          </span>
+          <span>
+            <Button variant="contained" color="secondary" onClick={deleteNote}>
+              Delete
+              <DeleteIcon />
+            </Button>
+          </span>
+        </CardActions>
+      </Card>
+    );
+  } else {
+    if (!props.tag) {
+      return (
+        <Card className={classes.cardStyle}>
+          <CardContent>
+            <Typography variant="h3" component="h2">
+              {title}
+            </Typography>
+            <Typography>{content}</Typography>
+            <div className="align-middle">Created: {createDate}</div>
+            <div className="align-middle">Updated: {updDate}</div>
+          </CardContent>
+        </Card>
+      );
+    } else return null;
+  }
 };
 
 export default withStyles(NotesStyles)(NoteCard);

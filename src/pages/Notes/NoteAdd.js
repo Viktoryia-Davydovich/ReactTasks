@@ -25,7 +25,8 @@ const AddNoteForm = props => {
     props.onSaveNote({
       title: title,
       content: content,
-      tag: tag
+      tag: tag,
+      user: props.user
     });
   };
 

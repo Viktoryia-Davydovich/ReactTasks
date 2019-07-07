@@ -16,9 +16,9 @@ import {
 
 function App(props) {
   const { isAuthenticated } = props.auth;
+  console.log(props.auth);
 
   if (isAuthenticated) {
-    debugger;
     return (
       <Wrapper>
         <Router>

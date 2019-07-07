@@ -2,13 +2,14 @@ import * as axios from "axios";
 
 const baseApiUrl = "https://glacial-ridge-25101.herokuapp.com/api/notes";
 
-const addNote = (title, content, tag) => {
+const addNote = (title, content, tag, user) => {
   return new Promise((resolve, reject) => {
     axios
       .post(`${baseApiUrl}/add`, {
         title: title,
         content: content,
-        tag: tag
+        tag: tag,
+        user: user
       })
       .then(result => {
         resolve(result.data);

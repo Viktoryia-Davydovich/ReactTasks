@@ -16,6 +16,9 @@ const NoteManager = props => {
   const [isAddNoteModalOpen, setAddNoteModalOpen] = useState(false);
   const [isEditNoteModalOpen, setEditNoteModalOpen] = useState(false);
 
+  const { isAuthenticated } = props.auth;
+  const { user } = props.auth;
+
   useEffect(() => {
     props.setTab({ tab: 2 });
 
@@ -58,9 +61,9 @@ const NoteManager = props => {
   const handleAddNote = note => {
     setAddNoteModalOpen(false);
 
-    const { title, content, tag } = note;
-
-    NoteService.addNote(title, content, tag)
+    const { title, content, tag, user } = note;
+    console.log(note);
+    NoteService.addNote(title, content, tag, user)
       .then(newNote => {
         NoteService.listNotes()
           .then(notes => {
@@ -124,48 +127,63 @@ const NoteManager = props => {
     setEditNoteModalOpen(false);
   };
 
-  return (
-    <div>
-      <Modal
-        isOpen={isAddNoteModalOpen}
-        onRequestClose={handleCloseAddNoteModal}
-      >
-        <NoteAdd
-          onSaveNote={handleAddNote}
-          onCloseModal={handleCloseAddNoteModal}
-        />
-      </Modal>
-      <Modal
-        isOpen={isEditNoteModalOpen}
-        onRequestClose={handleCloseEditNoteModal}
-      >
-        <NoteEdit
-          onSaveNote={handleEditNote}
-          onCloseModal={handleCloseEditNoteModal}
-          note={selectedNote}
-        />
-      </Modal>
-      <div className={props.classes.addBtnStyle}>
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={handleOpenAddNoteModal}
+  if (isAuthenticated) {
+    return (
+      <div>
+        <Modal
+          isOpen={isAddNoteModalOpen}
+          onRequestClose={handleCloseAddNoteModal}
         >
-          Add note
-        </button>
+          <NoteAdd
+            user={user.id}
+            onSaveNote={handleAddNote}
+            onCloseModal={handleCloseAddNoteModal}
+          />
+        </Modal>
+        <Modal
+          isOpen={isEditNoteModalOpen}
+          onRequestClose={handleCloseEditNoteModal}
+        >
+          <NoteEdit
+            onSaveNote={handleEditNote}
+            onCloseModal={handleCloseEditNoteModal}
+            note={selectedNote}
+          />
+        </Modal>
+        <div className={props.classes.addBtnStyle}>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleOpenAddNoteModal}
+          >
+            Add note
+          </button>
+        </div>
+        <NoteList
+          isAuthenticated={isAuthenticated}
+          user={user.id}
+          notes={notes}
+          onDeleteNote={handleDeleteNote}
+          onOpenEditNoteModal={handleOpenEditNoteModal}
+          onSaveNote={handleEditNote}
+        />
       </div>
+    );
+  } else {
+    return (
       <NoteList
         notes={notes}
         onDeleteNote={handleDeleteNote}
         onOpenEditNoteModal={handleOpenEditNoteModal}
         onSaveNote={handleEditNote}
       />
-    </div>
-  );
+    );
+  }
 };
 
 const mapStateToProps = state => ({
-  tab: state.tab
+  tab: state.tab,
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
