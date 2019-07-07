@@ -1,66 +1,43 @@
-import React, { Component } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
+import { withStyles } from "@material-ui/core/styles";
 
+import NotesStyles from "./styles";
 import NoteAdd from "./NoteAdd";
 import NoteEdit from "./NoteEdit";
 import NoteList from "./NoteList";
-
 import { NoteService } from "../../store/actions/NoteService";
 
-class NoteManager extends Component {
-  constructor(props) {
-    super(props);
+const NoteManager = props => {
+  const [notes, setNotes] = useState([]);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [isAddNoteModalOpen, setAddNoteModalOpen] = useState(false);
+  const [isEditNoteModalOpen, setEditNoteModalOpen] = useState(false);
 
-    this.state = {
-      notes: [],
-      selectedNote: null,
-      isAddNoteModalOpen: false,
-      isEditNoteModalOpen: false
-    };
-
-    this.handleAddNote = this.handleAddNote.bind(this);
-    this.handleEditNote = this.handleEditNote.bind(this);
-    this.handleDeleteNote = this.handleDeleteNote.bind(this);
-    this.handleChangePrivacy = this.handleChangePrivacy.bind(this);
-
-    this.handleOpenAddNoteModal = this.handleOpenAddNoteModal.bind(this);
-    this.handleCloseAddNoteModal = this.handleCloseAddNoteModal.bind(this);
-
-    this.handleOpenEditNoteModal = this.handleOpenEditNoteModal.bind(this);
-    this.handleCloseEditNoteModal = this.handleCloseEditNoteModal.bind(this);
-  }
-
-  componentDidMount() {
-    this.listNotes();
-  }
-
-  listNotes() {
+  useEffect(() => {
     NoteService.listNotes()
       .then(notes => {
-        this.setState({ notes });
+        setNotes(notes);
         return;
       })
       .catch(error => {
         console.log(error);
         return;
       });
-  }
+  });
 
-  handleDeleteNote(noteId) {
-    if (noteId < 1) {
-      throw Error("Cannot remove note. Invalid note id specified");
-    }
-
+  const handleDeleteNote = noteId => {
     const confirmation = window.confirm(
       "Are you sure you wish to remove note?"
     );
 
     if (confirmation) {
+      debugger;
       NoteService.removeNote(noteId)
         .then(() => {
           NoteService.listNotes()
             .then(notes => {
-              this.setState({ notes });
+              setNotes(notes);
               return;
             })
             .catch(error => {
@@ -73,10 +50,10 @@ class NoteManager extends Component {
           return;
         });
     }
-  }
+  };
 
-  handleAddNote(note) {
-    this.setState({ isAddNoteModalOpen: false });
+  const handleAddNote = note => {
+    setAddNoteModalOpen(false);
 
     const { title, content, tag } = note;
 
@@ -87,29 +64,25 @@ class NoteManager extends Component {
             notes.forEach(n =>
               n._id === newNote._id ? (n.isNew = "true") : (n.isNew = undefined)
             );
-            this.setState({ notes });
+            setNotes(notes);
           })
           .catch(error => console.log(error));
       })
       .catch(error => {
         console.log(error);
       });
-  }
+  };
 
-  handleChangePrivacy(tag) {
-    return !tag;
-  }
+  const handleOpenAddNoteModal = () => {
+    setAddNoteModalOpen(true);
+  };
 
-  handleOpenAddNoteModal() {
-    this.setState({ isAddNoteModalOpen: true });
-  }
+  const handleCloseAddNoteModal = () => {
+    setAddNoteModalOpen(false);
+  };
 
-  handleCloseAddNoteModal() {
-    this.setState({ isAddNoteModalOpen: false });
-  }
-
-  handleEditNote(note) {
-    this.setState({ isEditNoteModalOpen: false });
+  const handleEditNote = note => {
+    setEditNoteModalOpen(false);
 
     NoteService.updateNote(note)
       .then(() => {
@@ -118,76 +91,74 @@ class NoteManager extends Component {
             notes.forEach(n =>
               n.id === note.id ? (n.isNew = "true") : (n.isNew = undefined)
             );
-            this.setState({ notes });
+            setNotes(notes);
           })
           .catch(error => console.log(error));
       })
       .catch(error => {
         console.log(error);
       });
-  }
+  };
 
-  handleOpenEditNoteModal(noteId) {
+  const handleOpenEditNoteModal = noteId => {
     if (!noteId || noteId < 1) {
       throw Error("Cannot edit note. Invalid note id specified.");
     }
 
     NoteService.findNote(noteId)
       .then(note => {
-        this.setState({ selectedNote: note });
-        this.setState({ isEditNoteModalOpen: true });
+        setSelectedNote(note);
+        setEditNoteModalOpen(true);
         return;
       })
       .catch(error => {
         console.log(error);
         return;
       });
-  }
+  };
 
-  handleCloseEditNoteModal() {
-    this.setState({ isEditNoteModalOpen: false });
-  }
+  const handleCloseEditNoteModal = () => {
+    setEditNoteModalOpen(false);
+  };
 
-  render() {
-    return (
-      <div>
-        <Modal
-          isOpen={this.state.isAddNoteModalOpen}
-          onRequestClose={this.handleCloseAddNoteModal}
-        >
-          <NoteAdd
-            onSaveNote={this.handleAddNote}
-            onCloseModal={this.handleCloseAddNoteModal}
-          />
-        </Modal>
-        <Modal
-          isOpen={this.state.isEditNoteModalOpen}
-          onRequestClose={this.handleCloseEditNoteModal}
-        >
-          <NoteEdit
-            onSaveNote={this.handleEditNote}
-            onCloseModal={this.handleCloseEditNoteModal}
-            note={this.state.selectedNote}
-          />
-        </Modal>
-        <div className="mb-3">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={this.handleOpenAddNoteModal}
-          >
-            <i className="fa fa-plus">Add note</i>
-          </button>
-        </div>
-        <NoteList
-          notes={this.state.notes}
-          onDeleteNote={this.handleDeleteNote}
-          onOpenEditNoteModal={this.handleOpenEditNoteModal}
-          onChangePrivacy={this.handleChangePrivacy}
+  return (
+    <div>
+      <Modal
+        isOpen={isAddNoteModalOpen}
+        onRequestClose={handleCloseAddNoteModal}
+      >
+        <NoteAdd
+          onSaveNote={handleAddNote}
+          onCloseModal={handleCloseAddNoteModal}
         />
+      </Modal>
+      <Modal
+        isOpen={isEditNoteModalOpen}
+        onRequestClose={handleCloseEditNoteModal}
+      >
+        <NoteEdit
+          onSaveNote={handleEditNote}
+          onCloseModal={handleCloseEditNoteModal}
+          note={selectedNote}
+        />
+      </Modal>
+      <div className={props.classes.addBtnStyle}>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={handleOpenAddNoteModal}
+        >
+          Add note
+        </button>
       </div>
-    );
-  }
-}
+      <NoteList
+        notes={notes}
+        onDeleteNote={handleDeleteNote}
+        onOpenEditNoteModal={handleOpenEditNoteModal}
+        onSaveNote={handleEditNote}
+      />
+    </div>
+  );
+};
 
-export default NoteManager;
+export default withStyles(NotesStyles)(NoteManager);

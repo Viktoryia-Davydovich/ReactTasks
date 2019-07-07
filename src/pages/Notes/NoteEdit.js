@@ -1,127 +1,100 @@
-import React, { Component } from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
-class EditNoteForm extends Component {
-  constructor(props) {
-    super(props);
+const EditNoteForm = props => {
+  const [title, setTitle] = useState(props.note.title);
+  const [content, setContent] = useState(props.note.content);
+  const [tag, setTag] = useState(props.note.tag);
 
-    this.state = {
-      _id: props.note._id,
-      title: props.note.title,
-      content: props.note.content,
-      tag: props.note.tag
-    };
+  const handleTitleChange = useCallback(event => {
+    setTitle(event.target.value.trim());
+  }, []);
 
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onContentChange = this.onContentChange.bind(this);
-    this.onTagChange = this.onTagChange.bind(this);
-    this.onSave = this.onSave.bind(this);
-  }
+  const handleContentChange = useCallback(event => {
+    setContent(event.target.value.trim());
+  }, []);
 
-  onTitleChange(event) {
-    const title = event.target.value;
+  const handleTagChange = useCallback(event => {
+    setTag(event.target.checked);
+  }, []);
 
-    this.validateTitle(title);
-
-    this.setState({ title: title });
-  }
-
-  onContentChange(event) {
-    const content = event.target.value;
-
-    this.validateContent(content);
-
-    this.setState({ content: content });
-  }
-
-  onTagChange(event) {
-    this.setState({ tag: event.target.checked });
-  }
-
-  onSave(event) {
+  const onSave = event => {
     event.preventDefault();
+    props.onSaveNote({
+      _id: props.note._id,
+      title: title,
+      content: content,
+      tag: tag,
+      updatedDate: Date.now()
+    });
+  };
 
-    if (
-      this.state.validationErrors &&
-      this.state.validationErrors.length === 0
-    ) {
-      const { title, content } = this.state;
-
-      if (this.validateTitle(title) && this.validateContent(content)) {
-        this.props.onSaveNote({
-          id: this.state.id,
-          title: this.state.title,
-          content: this.state.content,
-          tags: this.state.tags
-        });
-      }
-    }
-  }
-
-  render() {
-    return (
-      <div className="card card-body">
-        <div className="mb-2">
-          <span className="h4 my-auto">
-            <i className="fa fa-file-text-o fa-lg"></i> Edit Note
-          </span>
-          <a className="float-right ml-auto" onClick={this.props.onCloseModal}>
-            <i className="fa fa-remove mr-2 fa-2x text-danger"></i>
-          </a>
-        </div>
-        <form onSubmit={this.onSave} className="mt-2">
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              className="form-control"
-              name="title"
-              autoFocus
-              onChange={this.onTitleChange}
-              value={this.state.title}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="content">Content</label>
-            <textarea
-              className="form-control"
-              name="content"
-              rows="3"
-              onChange={this.onContentChange}
-              value={this.state.content}
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label htmlFor="tags">Tags</label>
-            <input
-              type="text"
-              className="form-control"
-              name="tags"
-              onChange={this.onTagsChange}
-              value={this.state.tags.join(",")}
-            />
-          </div>
-          <div className="form-group row">
-            <div className="col-sm-4 col-md-3 col-xl-2 ml-auto">
-              <button type="submit" className="btn btn-success btn-block">
-                <i className="fa fa-save mr-2"></i>Save
-              </button>
-            </div>
-            <div className="col-sm-4 col-md-3 col-xl-2">
-              <button
-                className="btn btn-danger btn-block mt-2 mt-sm-0"
-                onClick={this.props.onCloseModal}
-                type="button"
-              >
-                <i className="fa fa-remove mr-2"></i>Cancel
-              </button>
-            </div>
-          </div>
-        </form>
+  return (
+    <div className="card card-body">
+      <div className="mb-2">
+        <span className="h4 my-auto">
+          <i className="fa fa-file-text-o fa-lg"></i> Edit Note
+        </span>
+        <a className="float-right ml-auto" onClick={props.onCloseModal}>
+          <i className="fa fa-remove mr-2 fa-2x text-danger"></i>
+        </a>
       </div>
-    );
-  }
-}
+      <form onSubmit={onSave} className="mt-2">
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            className="form-control"
+            name="title"
+            autoFocus
+            onChange={handleTitleChange}
+            value={title}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="content">Content</label>
+          <textarea
+            className="form-control"
+            name="content"
+            rows="3"
+            onChange={handleContentChange}
+            value={content}
+          ></textarea>
+        </div>
+        <div className="form-group">
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={tag}
+                onChange={handleTagChange}
+                value="private"
+              />
+            }
+            label="Private"
+          />
+        </div>
+        <div className="form-group row">
+          <div className="col-sm-4 col-md-3 col-xl-2 ml-auto">
+            <button type="submit" className="btn btn-success btn-block">
+              <i className="fa fa-save mr-2"></i>Save
+            </button>
+          </div>
+          <div className="col-sm-4 col-md-3 col-xl-2">
+            <button
+              className="btn btn-danger btn-block mt-2 mt-sm-0"
+              onClick={props.onCloseModal}
+              type="button"
+            >
+              <i className="fa fa-remove mr-2"></i>Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 EditNoteForm.propTypes = {
   note: PropTypes.object,
