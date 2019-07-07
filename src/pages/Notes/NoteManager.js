@@ -1,12 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 import NotesStyles from "./styles";
 import NoteAdd from "./NoteAdd";
 import NoteEdit from "./NoteEdit";
 import NoteList from "./NoteList";
 import { NoteService } from "../../store/actions/NoteService";
+import { setTab } from "../../store/actions/types";
 
 const NoteManager = props => {
   const [notes, setNotes] = useState([]);
@@ -15,6 +17,8 @@ const NoteManager = props => {
   const [isEditNoteModalOpen, setEditNoteModalOpen] = useState(false);
 
   useEffect(() => {
+    props.setTab({ tab: 2 });
+
     NoteService.listNotes()
       .then(notes => {
         setNotes(notes);
@@ -24,7 +28,7 @@ const NoteManager = props => {
         console.log(error);
         return;
       });
-  });
+  }, []);
 
   const handleDeleteNote = noteId => {
     const confirmation = window.confirm(
@@ -32,7 +36,6 @@ const NoteManager = props => {
     );
 
     if (confirmation) {
-      debugger;
       NoteService.removeNote(noteId)
         .then(() => {
           NoteService.listNotes()
@@ -161,4 +164,15 @@ const NoteManager = props => {
   );
 };
 
-export default withStyles(NotesStyles)(NoteManager);
+const mapStateToProps = state => ({
+  tab: state.tab
+});
+
+const mapDispatchToProps = dispatch => ({
+  setTab: data => dispatch(setTab(data))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(NotesStyles)(NoteManager));
