@@ -12,7 +12,6 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 import NotesStyles from "./styles";
-import { notEqual } from "assert";
 
 const NoteCard = props => {
   const {
@@ -44,7 +43,7 @@ const NoteCard = props => {
     });
   };
 
-  if (auth && user == noteAuthor) {
+  if (auth && user === noteAuthor) {
     return (
       <Card className={classes.cardStyle}>
         <CardContent>

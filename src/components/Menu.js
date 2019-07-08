@@ -20,7 +20,7 @@ const Menu = props => {
     props.logoutUser(props.history);
   };
 
-  const { isAuthenticated, user } = props.auth;
+  const { isAuthenticated } = props.auth;
 
   const authLinks = (
     <div>

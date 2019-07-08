@@ -37,9 +37,9 @@ const EditNoteForm = props => {
         <span className="h4 my-auto">
           <i className="fa fa-file-text-o fa-lg"></i> Edit Note
         </span>
-        <a className="float-right ml-auto" onClick={props.onCloseModal}>
-          <i className="fa fa-remove mr-2 fa-2x text-danger"></i>
-        </a>
+        <button className="float-right ml-auto" onClick={props.onCloseModal}>
+          X
+        </button>
       </div>
       <form onSubmit={onSave} className="mt-2">
         <div className="form-group">

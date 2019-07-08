@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -31,7 +31,7 @@ const NoteManager = props => {
         console.log(error);
         return;
       });
-  }, []);
+  }, [props]);
 
   const handleDeleteNote = noteId => {
     const confirmation = window.confirm(
