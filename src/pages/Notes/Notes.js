@@ -134,7 +134,7 @@ const NoteManager = props => {
           onRequestClose={handleCloseAddNoteModal}
         >
           <NoteAdd
-            user={user.id}
+            user={user.email}
             onSaveNote={handleAddNote}
             onCloseModal={handleCloseAddNoteModal}
           />
@@ -160,7 +160,7 @@ const NoteManager = props => {
         </div>
         <NoteList
           isAuthenticated={isAuthenticated}
-          user={user}
+          user={user.email}
           notes={notes}
           onDeleteNote={handleDeleteNote}
           onOpenEditNoteModal={handleOpenEditNoteModal}

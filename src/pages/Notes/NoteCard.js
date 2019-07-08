@@ -26,7 +26,6 @@ const NoteCard = props => {
     auth,
     user,
     noteAuthor,
-    userEmail,
     classes
   } = props;
 
@@ -48,11 +47,11 @@ const NoteCard = props => {
     return (
       <Card className={classes.cardStyle}>
         <CardContent>
-          <Typography variant="h3" component="h2">
+          <Typography variant="h3" component="h2" align="center">
             {title}
           </Typography>
-          <Typography variant="h6">{userEmail}</Typography>
-          <Typography>{content}</Typography>
+          <Typography variant="caption">{noteAuthor}</Typography>
+          <Typography className={classes.contentStyle}>{content}</Typography>
           <div>
             <FormControlLabel
               control={
@@ -65,8 +64,12 @@ const NoteCard = props => {
               label="Private"
             />
           </div>
-          <div className="align-middle">Created: {createDate}</div>
-          <div className="align-middle">Updated: {updDate}</div>
+          <div>
+            <strong>Created:</strong> {createDate}
+          </div>
+          <div>
+            <strong>Updated:</strong> {updDate}
+          </div>
         </CardContent>
         <CardActions>
           <span>
@@ -89,12 +92,17 @@ const NoteCard = props => {
       return (
         <Card className={classes.cardStyle}>
           <CardContent>
-            <Typography variant="h3" component="h2">
+            <Typography variant="h3" component="h2" align="center">
               {title}
             </Typography>
-            <Typography>{content}</Typography>
-            <div className="align-middle">Created: {createDate}</div>
-            <div className="align-middle">Updated: {updDate}</div>
+            <Typography variant="caption">{noteAuthor}</Typography>
+            <Typography className={classes.contentStyle}>{content}</Typography>
+            <div>
+              <strong>Created:</strong> {createDate}
+            </div>
+            <div>
+              <strong>Updated:</strong> {updDate}
+            </div>
           </CardContent>
         </Card>
       );

@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import { useTheme } from "./themeSwitch";
 import { logoutUser } from "../store/actions/authentication";
 import { setTab } from "../store/actions/types";
+import MenuStyles from "./styles";
 
 const Menu = props => {
   const handleChange = (event, tab) => {
@@ -23,7 +24,7 @@ const Menu = props => {
   const { isAuthenticated } = props.auth;
 
   const authLinks = (
-    <div>
+    <div style={MenuStyles.navMenuStyle}>
       <Tabs
         indicatorColor="primary"
         textColor="primary"
@@ -33,10 +34,10 @@ const Menu = props => {
         <Tab label="About us" to="/about" component={Link} />
         <Tab label="Counters" to="/counters" component={Link} />
         <Tab label="Notes" to="/notes" component={Link} />
-        <Button variant="contained" color="secondary" onClick={onLogout}>
-          Logout
-        </Button>
       </Tabs>
+      <Button variant="contained" color="secondary" onClick={onLogout}>
+        Logout
+      </Button>
     </div>
   );
 
@@ -56,7 +57,7 @@ const Menu = props => {
   const themeState = useTheme();
 
   return (
-    <div style={{ padding: "15px" }}>
+    <div style={{ padding: "15px", paddingRight: "45px" }}>
       <Button
         variant="contained"
         color="secondary"

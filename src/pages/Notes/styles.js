@@ -15,6 +15,10 @@ const NotesStyles = {
     padding: "15px",
     paddingBottom: "30px",
     fontFamily: "Helvetica"
+  },
+  contentStyle: {
+    padding: "10px 0",
+    borderBottom: "0.5px solid gray"
   }
 };
 
