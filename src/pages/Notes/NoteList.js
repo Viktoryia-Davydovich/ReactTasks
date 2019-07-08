@@ -27,7 +27,8 @@ const NoteList = props => {
         deleteNote={() => props.onDeleteNote(note._id)}
         changePrivacy={props.onSaveNote}
         auth={props.isAuthenticated}
-        user={props.user}
+        user={props.user.id}
+        userEmail={props.user.email}
         noteAuthor={note.user}
       />
     );

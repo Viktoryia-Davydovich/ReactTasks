@@ -160,7 +160,7 @@ const NoteManager = props => {
         </div>
         <NoteList
           isAuthenticated={isAuthenticated}
-          user={user.id}
+          user={user}
           notes={notes}
           onDeleteNote={handleDeleteNote}
           onOpenEditNoteModal={handleOpenEditNoteModal}

@@ -26,6 +26,7 @@ const NoteCard = props => {
     auth,
     user,
     noteAuthor,
+    userEmail,
     classes
   } = props;
 
@@ -50,6 +51,7 @@ const NoteCard = props => {
           <Typography variant="h3" component="h2">
             {title}
           </Typography>
+          <Typography variant="h6">{userEmail}</Typography>
           <Typography>{content}</Typography>
           <div>
             <FormControlLabel
