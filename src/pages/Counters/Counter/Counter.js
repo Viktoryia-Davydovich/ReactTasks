@@ -5,7 +5,7 @@ import CounterForm from "./view/index";
 class Counter extends Component {
   state = {
     count: 0
-  }
+  };
 
   isCountEven = () => this.state.count % 2 === 0;
 
@@ -38,19 +38,11 @@ class Counter extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log("component did mount - CounterContainer");
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
-    console.log("should component update - CounterContainer");
-
     return this.state.count !== nextState.count;
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("component will receive props - CounterContainer");
-
     if (nextProps.label === "add" && this.isCountEven()) {
       this.setState({ count: this.state.count + 1 });
     }
@@ -62,14 +54,6 @@ class Counter extends Component {
     if (nextProps.label === "reset") {
       this.setState({ count: 0 });
     }
-  }
-
-  componentDidUpdate() {
-    console.log("component did update - CounterContainer");
-  }
-
-  componentWillUnmount() {
-    console.log("component will unmount - CounterContainer");
   }
 }
 

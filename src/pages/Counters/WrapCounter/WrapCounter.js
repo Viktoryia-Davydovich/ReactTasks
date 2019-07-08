@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import WrapCounterForm from "./view/index";
 
 class WrapCounter extends Component {
-
   state = {
     countersCount: 1,
     counters: [
@@ -22,7 +21,6 @@ class WrapCounter extends Component {
       counters: [...existingsCounters, { key: this.state.countersCount + 1 }],
       label: "add"
     });
-
   };
 
   deleteCounter = () => {
@@ -48,8 +46,6 @@ class WrapCounter extends Component {
   };
 
   render() {
-    console.log("render - WrapCounterContainer");
-
     return (
       <WrapCounterForm
         label={this.state.label}
@@ -62,28 +58,12 @@ class WrapCounter extends Component {
     );
   }
 
-  componentDidMount() {
-    console.log("component did mount - WrapCounterContainer");
-  }
-
   shouldComponentUpdate() {
-    console.log("component should update - WrapCounterContainer");
-
     return true;
   }
 
   componentWillReceiveProps() {
-    console.log("component will receive props - WrapCounterContainer");
-
     return true;
-  }
-
-  componentDidUpdate() {
-    console.log("component did update - WrapCounterContainer");
-  }
-
-  componentWillUnmount() {
-    console.log("component will unmount - WrapCounterContainer");
   }
 }
 

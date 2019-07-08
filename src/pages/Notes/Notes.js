@@ -62,7 +62,6 @@ const NoteManager = props => {
     setAddNoteModalOpen(false);
 
     const { title, content, tag, user } = note;
-    console.log(note);
     NoteService.addNote(title, content, tag, user)
       .then(newNote => {
         NoteService.listNotes()
