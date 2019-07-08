@@ -12,7 +12,6 @@ const NoteList = props => {
         id={note._id}
         title={note.title}
         content={note.content}
-        user={note.user}
         createDate={`${new Date(note.createdDate)
           .toISOString()
           .slice(0, 10)} ${new Date(note.createdDate)
@@ -28,6 +27,7 @@ const NoteList = props => {
         deleteNote={() => props.onDeleteNote(note._id)}
         changePrivacy={props.onSaveNote}
         auth={props.isAuthenticated}
+        user={props.user}
         noteAuthor={note.user}
       />
     );

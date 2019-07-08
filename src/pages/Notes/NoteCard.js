@@ -43,7 +43,7 @@ const NoteCard = props => {
     });
   };
 
-  if (auth && user == noteAuthor) {
+  if (auth && user === noteAuthor) {
     return (
       <Card className={classes.cardStyle}>
         <CardContent>
