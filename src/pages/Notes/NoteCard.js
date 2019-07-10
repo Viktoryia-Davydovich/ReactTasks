@@ -73,13 +73,21 @@ const NoteCard = props => {
         </CardContent>
         <CardActions>
           <span>
-            <Button variant="contained" color="primary" onClick={editNote}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => editNote(id)}
+            >
               Edit
               <CreateIcon />
             </Button>
           </span>
           <span>
-            <Button variant="contained" color="secondary" onClick={deleteNote}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => deleteNote(id)}
+            >
               Delete
               <DeleteIcon />
             </Button>
