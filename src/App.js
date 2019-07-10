@@ -17,37 +17,30 @@ import {
 function App(props) {
   const { isAuthenticated } = props.auth;
 
-  if (isAuthenticated) {
-    return (
-      <Wrapper>
-        <Router>
-          <Menu />
-          <Switch>
-            <Route exact path="/" />
-            <Route path="/counters" component={WrapCounter} />
-            <Route path="/about" component={About} />
-            <Route path="/notes" component={Notes} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={LoginReduxForm} />
-            <Route path="/404" component={NotFound} />
-            <Route component={() => <Redirect from="*" to="/404" />} />
-          </Switch>
-        </Router>
-      </Wrapper>
-    );
-  } else {
-  }
+  const authRoutes = [
+    <Route path="/counters" component={WrapCounter} />,
+    <Route path="/about" component={About} />
+  ];
+
+  const guestRoutes = [
+    <Route path="/register" component={Register} />,
+    <Route path="/login" component={LoginReduxForm} />
+  ];
+
   return (
     <Wrapper>
       <Router>
         <Menu />
         <Switch>
           <Route exact path="/" />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={LoginReduxForm} />
           <Route path="/notes" component={Notes} />
           <Route path="/404" component={NotFound} />
-          <Route component={() => <Redirect from="*" to="/login" />} />
+          {isAuthenticated ? authRoutes : guestRoutes}
+          <Route
+            component={() => (
+              <Redirect from="*" to={isAuthenticated ? "/notes" : "/login"} />
+            )}
+          />
         </Switch>
       </Router>
     </Wrapper>

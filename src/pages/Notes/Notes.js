@@ -10,13 +10,12 @@ import NoteList from "./NoteList";
 import { NoteService } from "../../store/actions/NoteService";
 
 const NoteManager = props => {
+  const { isAuthenticated, user } = props.auth;
+
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
   const [isAddNoteModalOpen, setAddNoteModalOpen] = useState(false);
   const [isEditNoteModalOpen, setEditNoteModalOpen] = useState(false);
-
-  const { isAuthenticated } = props.auth;
-  const { user } = props.auth;
 
   useEffect(() => {
     NoteService.listNotes()
@@ -91,7 +90,7 @@ const NoteManager = props => {
         NoteService.listNotes()
           .then(notes => {
             notes.forEach(n =>
-              n.id === note.id ? (n.isNew = "true") : (n.isNew = undefined)
+              n._id === note._id ? (n.isNew = "true") : (n.isNew = undefined)
             );
             setNotes(notes);
           })
