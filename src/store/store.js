@@ -23,9 +23,3 @@ export const store = createStore(
   applyMiddleware(thunk)
 );
 export const persistor = persistStore(store);
-
-/*
-const store = createStore(rootReducer, inititalState, applyMiddleware(thunk));
-
-export default store;
-*/

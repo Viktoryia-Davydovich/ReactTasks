@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import { loginUser } from "../../store/actions/authentication";
 import LoginForm from "./LoginReduxFormView";
-import { setTab } from "../../store/actions/types";
 
 const LoginReduxForm = props => {
   const [email, setEmail] = useState("");
@@ -29,7 +28,6 @@ const LoginReduxForm = props => {
   }, []);
 
   useEffect(() => {
-    props.setTab({ tab: 1 });
     if (props.auth.isAuthenticated) {
       props.history.push("/");
     } else if (props.errorsLogin) {
@@ -57,13 +55,11 @@ LoginReduxForm.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errorsLogin: state.errorsLogin,
-  tab: state.tab
+  errorsLogin: state.errorsLogin
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: data => dispatch(loginUser(data)),
-  setTab: data => dispatch(setTab(data))
+  loginUser: data => dispatch(loginUser(data))
 });
 
 export default connect(

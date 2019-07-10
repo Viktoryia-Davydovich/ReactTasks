@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -8,53 +8,37 @@ import Button from "@material-ui/core/Button";
 
 import { useTheme } from "./themeSwitch";
 import { logoutUser } from "../store/actions/authentication";
-import { setTab } from "../store/actions/types";
-import MenuStyles from "./styles";
 
 const Menu = props => {
-  const handleChange = (event, tab) => {
-    props.setTab({ tab: tab });
-  };
+  const themeState = useTheme();
+  const { isAuthenticated } = props.auth;
+  const [tab, setTab] = useState("notes");
 
-  const onLogout = event => {
+  useEffect(() => {
+    setTab(window.location.pathname.split("/").pop());
+  }, []);
+
+  const handleChange = useCallback((event, tab) => {
+    setTab(tab);
+  }, []);
+
+  const onLogout = useCallback(event => {
     event.preventDefault();
     props.logoutUser(props.history);
-  };
+  }, []);
 
-  const { isAuthenticated } = props.auth;
+  const authLinks = [
+    <Tab label="About us" to="/about" component={Link} value="about" />,
+    <Tab label="Counters" to="/counters" component={Link} value="counters" />,
+    <Button variant="contained" color="secondary" onClick={onLogout}>
+      Logout
+    </Button>
+  ];
 
-  const authLinks = (
-    <div style={MenuStyles.navMenuStyle}>
-      <Tabs
-        indicatorColor="primary"
-        textColor="primary"
-        value={props.tab}
-        onChange={handleChange}
-      >
-        <Tab label="About us" to="/about" component={Link} />
-        <Tab label="Counters" to="/counters" component={Link} />
-        <Tab label="Notes" to="/notes" component={Link} />
-      </Tabs>
-      <Button variant="contained" color="secondary" onClick={onLogout}>
-        Logout
-      </Button>
-    </div>
-  );
-
-  const guestLinks = (
-    <Tabs
-      indicatorColor="primary"
-      textColor="primary"
-      value={props.tab}
-      onChange={handleChange}
-    >
-      <Tab label="Register" to="/register" component={Link} />
-      <Tab label="Log in" to="/login" component={Link} />
-      <Tab label="Notes" to="/notes" component={Link} />
-    </Tabs>
-  );
-
-  const themeState = useTheme();
+  const guestLinks = [
+    <Tab label="Register" to="/register" component={Link} value="register" />,
+    <Tab label="Log in" to="/login" component={Link} value="login" />
+  ];
 
   return (
     <div style={{ padding: "15px", paddingRight: "45px" }}>
@@ -65,7 +49,15 @@ const Menu = props => {
       >
         {themeState.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
       </Button>
-      {isAuthenticated ? authLinks : guestLinks}
+      <Tabs
+        indicatorColor="primary"
+        textColor="primary"
+        value={tab}
+        onChange={handleChange}
+      >
+        <Tab label="Notes" to="/notes" component={Link} value="notes" />
+        {isAuthenticated ? authLinks : guestLinks}
+      </Tabs>
     </div>
   );
 };
@@ -76,13 +68,11 @@ Menu.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  tab: state.tab
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
-  logoutUser: data => dispatch(logoutUser(data)),
-  setTab: data => dispatch(setTab(data))
+  logoutUser: data => dispatch(logoutUser(data))
 });
 
 export default connect(

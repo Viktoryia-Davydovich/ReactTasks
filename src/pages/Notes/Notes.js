@@ -8,7 +8,6 @@ import NoteAdd from "./NoteAdd";
 import NoteEdit from "./NoteEdit";
 import NoteList from "./NoteList";
 import { NoteService } from "../../store/actions/NoteService";
-import { setTab } from "../../store/actions/types";
 
 const NoteManager = props => {
   const [notes, setNotes] = useState([]);
@@ -20,8 +19,6 @@ const NoteManager = props => {
   const { user } = props.auth;
 
   useEffect(() => {
-    props.setTab({ tab: 2 });
-
     NoteService.listNotes()
       .then(notes => {
         setNotes(notes);
@@ -181,15 +178,7 @@ const NoteManager = props => {
 };
 
 const mapStateToProps = state => ({
-  tab: state.tab,
   auth: state.auth
 });
 
-const mapDispatchToProps = dispatch => ({
-  setTab: data => dispatch(setTab(data))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(NotesStyles)(NoteManager));
+export default connect(mapStateToProps)(withStyles(NotesStyles)(NoteManager));
