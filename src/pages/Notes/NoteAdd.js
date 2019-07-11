@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import useForm from "../../hooks/NoteHook";
+import useForm from "../../hooks/NoteAddEditHook";
 
 const AddNoteForm = props => {
   const [values, handleChange] = useForm();

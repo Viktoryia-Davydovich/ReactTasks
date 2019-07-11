@@ -7,131 +7,41 @@ import NotesStyles from "./styles";
 import NoteAdd from "./NoteAdd";
 import NoteEdit from "./NoteEdit";
 import NoteList from "./NoteList";
-import { NoteService } from "../../store/actions/NoteService";
 
-import useLoadNotes from "../../hooks/LoadNotesHook";
+import useNotes from "../../hooks/NotesHook";
 
 const Notes = props => {
   const { isAuthenticated, user } = props.auth;
 
-  const [notes, setNotes] = useLoadNotes([]);
-  const [selectedNote, setSelectedNote] = useState(null);
-  const [isAddNoteModalOpen, setAddNoteModalOpen] = useState(false);
-  const [isEditNoteModalOpen, setEditNoteModalOpen] = useState(false);
-
-  const handleDeleteNote = noteId => {
-    const confirmation = window.confirm(
-      "Are you sure you wish to remove note?"
-    );
-
-    if (confirmation) {
-      NoteService.removeNote(noteId)
-        .then(() => {
-          NoteService.listNotes()
-            .then(notes => {
-              setNotes(notes);
-              return;
-            })
-            .catch(error => {
-              console.log(error);
-              return;
-            });
-        })
-        .catch(error => {
-          console.log(error);
-          return;
-        });
-    }
-  };
-
-  const handleAddNote = note => {
-    setAddNoteModalOpen(false);
-
-    const { title, content, tag, user } = note;
-    NoteService.addNote(title, content, tag, user)
-      .then(newNote => {
-        NoteService.listNotes()
-          .then(notes => {
-            notes.forEach(n =>
-              n._id === newNote._id ? (n.isNew = "true") : (n.isNew = undefined)
-            );
-            setNotes(notes);
-          })
-          .catch(error => console.log(error));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const handleOpenAddNoteModal = () => {
-    setAddNoteModalOpen(true);
-  };
-
-  const handleCloseAddNoteModal = () => {
-    setAddNoteModalOpen(false);
-  };
-
-  const handleEditNote = note => {
-    setEditNoteModalOpen(false);
-
-    NoteService.updateNote(note)
-      .then(() => {
-        NoteService.listNotes()
-          .then(notes => {
-            notes.forEach(n =>
-              n.id === note.id ? (n.isNew = "true") : (n.isNew = undefined)
-            );
-            setNotes(notes);
-          })
-          .catch(error => console.log(error));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const handleOpenEditNoteModal = noteId => {
-    if (!noteId || noteId < 1) {
-      throw Error("Cannot edit note. Invalid note id specified.");
-    }
-
-    NoteService.findNote(noteId)
-      .then(note => {
-        setSelectedNote(note);
-        setEditNoteModalOpen(true);
-        return;
-      })
-      .catch(error => {
-        console.log(error);
-        return;
-      });
-  };
-
-  const handleCloseEditNoteModal = () => {
-    setEditNoteModalOpen(false);
-  };
+  const {
+    notes,
+    deleteNote,
+    addNote,
+    editNote,
+    selectedNote,
+    isAddModalOpen,
+    setAddModalOpen,
+    isEditModalOpen,
+    setSelectedEditModalOpen
+  } = useNotes();
 
   if (isAuthenticated) {
     return (
       <div>
-        <Modal
-          isOpen={isAddNoteModalOpen}
-          onRequestClose={handleCloseAddNoteModal}
-        >
+        <Modal isOpen={isAddModalOpen} onRequestClose={setAddModalOpen}>
           <NoteAdd
             user={user.email}
-            onSaveNote={handleAddNote}
-            onCloseModal={handleCloseAddNoteModal}
+            onSaveNote={addNote}
+            onCloseModal={setAddModalOpen}
           />
         </Modal>
         <Modal
-          isOpen={isEditNoteModalOpen}
-          onRequestClose={handleCloseEditNoteModal}
+          isOpen={isEditModalOpen}
+          onRequestClose={setSelectedEditModalOpen}
         >
           <NoteEdit
-            onSaveNote={handleEditNote}
-            onCloseModal={handleCloseEditNoteModal}
+            onSaveNote={editNote}
+            onCloseModal={setSelectedEditModalOpen}
             note={selectedNote}
           />
         </Modal>
@@ -139,7 +49,7 @@ const Notes = props => {
           <button
             className="btn btn-primary"
             type="button"
-            onClick={handleOpenAddNoteModal}
+            onClick={setAddModalOpen}
           >
             Add note
           </button>
@@ -148,9 +58,9 @@ const Notes = props => {
           isAuthenticated={isAuthenticated}
           user={user.email}
           notes={notes}
-          onDeleteNote={handleDeleteNote}
-          onOpenEditNoteModal={handleOpenEditNoteModal}
-          onSaveNote={handleEditNote}
+          onDeleteNote={deleteNote}
+          onOpenEditNoteModal={setSelectedEditModalOpen}
+          onSaveNote={editNote}
         />
       </div>
     );
@@ -158,9 +68,9 @@ const Notes = props => {
     return (
       <NoteList
         notes={notes}
-        onDeleteNote={handleDeleteNote}
-        onOpenEditNoteModal={handleOpenEditNoteModal}
-        onSaveNote={handleEditNote}
+        onDeleteNote={deleteNote}
+        onOpenEditNoteModal={setSelectedEditModalOpen}
+        onSaveNote={editNote}
       />
     );
   }
