@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import useForm from "./NoteHook";
+import useForm from "../../hooks/NoteHook";
 
 const AddNoteForm = props => {
-  const { values, handleChange } = useForm();
+  const [values, handleChange] = useForm();
   const { user, onSaveNote, onCloseModal } = props;
 
   const onSave = event => {

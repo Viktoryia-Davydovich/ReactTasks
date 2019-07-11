@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
-const useForm = () => {
-  const [values, setValues] = useState({});
+const useForm = (obj = {}) => {
+  const [values, setValues] = useState(obj);
 
   const handleChange = useCallback(event => {
     event.persist();
@@ -14,10 +14,7 @@ const useForm = () => {
         }));
   }, []);
 
-  return {
-    handleChange,
-    values
-  };
+  return [values, handleChange];
 };
 
 export default useForm;

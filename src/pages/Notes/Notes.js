@@ -90,7 +90,7 @@ const NoteManager = props => {
         NoteService.listNotes()
           .then(notes => {
             notes.forEach(n =>
-              n._id === note._id ? (n.isNew = "true") : (n.isNew = undefined)
+              n.id === note.id ? (n.isNew = "true") : (n.isNew = undefined)
             );
             setNotes(notes);
           })

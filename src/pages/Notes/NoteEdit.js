@@ -3,30 +3,17 @@ import PropTypes from "prop-types";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
+import useForm from "../../hooks/NoteHook";
+
 const EditNoteForm = props => {
-  const [title, setTitle] = useState(props.note.title);
-  const [content, setContent] = useState(props.note.content);
-  const [tag, setTag] = useState(props.note.tag);
-
-  const handleTitleChange = useCallback(event => {
-    setTitle(event.target.value.trim());
-  }, []);
-
-  const handleContentChange = useCallback(event => {
-    setContent(event.target.value.trim());
-  }, []);
-
-  const handleTagChange = useCallback(event => {
-    setTag(event.target.checked);
-  }, []);
+  const { note, onSaveNote, onCloseModal } = props;
+  const [values, handleChange] = useForm(note);
 
   const onSave = event => {
     event.preventDefault();
-    props.onSaveNote({
-      _id: props.note._id,
-      title: title,
-      content: content,
-      tag: tag,
+    onSaveNote({
+      ...values,
+      _id: note._id,
       updatedDate: Date.now()
     });
   };
@@ -37,7 +24,7 @@ const EditNoteForm = props => {
         <span className="h4 my-auto">
           <i className="fa fa-file-text-o fa-lg"></i> Edit Note
         </span>
-        <button className="float-right ml-auto" onClick={props.onCloseModal}>
+        <button className="float-right ml-auto" onClick={onCloseModal}>
           X
         </button>
       </div>
@@ -49,8 +36,8 @@ const EditNoteForm = props => {
             className="form-control"
             name="title"
             autoFocus
-            onChange={handleTitleChange}
-            value={title}
+            onChange={handleChange}
+            value={values.title}
           />
         </div>
         <div className="form-group">
@@ -59,16 +46,16 @@ const EditNoteForm = props => {
             className="form-control"
             name="content"
             rows="3"
-            onChange={handleContentChange}
-            value={content}
+            onChange={handleChange}
+            value={values.content}
           ></textarea>
         </div>
         <div className="form-group">
           <FormControlLabel
             control={
               <Checkbox
-                checked={tag}
-                onChange={handleTagChange}
+                checked={values.tag}
+                onChange={handleChange}
                 value="private"
               />
             }
@@ -84,7 +71,7 @@ const EditNoteForm = props => {
           <div className="col-sm-4 col-md-3 col-xl-2">
             <button
               className="btn btn-danger btn-block mt-2 mt-sm-0"
-              onClick={props.onCloseModal}
+              onClick={onCloseModal}
               type="button"
             >
               <i className="fa fa-remove mr-2"></i>Cancel
