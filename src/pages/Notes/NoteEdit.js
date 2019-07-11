@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from "react";
-import PropTypes from "prop-types";
+import React from "react";
+import Modal from "react-modal";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import useForm from "../../hooks/NoteAddEditHook";
 
-const EditNoteForm = props => {
+const EditNoteModal = props => {
   const { note, onSaveNote, onCloseModal } = props;
   const [values, handleChange] = useForm(note);
 
@@ -83,10 +83,4 @@ const EditNoteForm = props => {
   );
 };
 
-EditNoteForm.propTypes = {
-  note: PropTypes.object,
-  onCloseModal: PropTypes.func,
-  onSaveNote: PropTypes.func
-};
-
-export default EditNoteForm;
+export default EditNoteModal;

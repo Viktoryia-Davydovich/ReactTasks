@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import Modal from "react-modal";
 
 import NotesStyles from "./styles";
-import NoteAdd from "./NoteAdd";
-import NoteEdit from "./NoteEdit";
+import AddNoteModal from "./NoteAdd";
+import EditNoteModal from "./NoteEdit";
 import NoteList from "./NoteList";
 
 import useNotes from "../../hooks/NotesHook";
@@ -28,18 +28,18 @@ const Notes = props => {
   if (isAuthenticated) {
     return (
       <div>
-        <Modal isOpen={isAddModalOpen} onRequestClose={setAddModalOpen}>
-          <NoteAdd
-            user={user.email}
-            onSaveNote={addNote}
-            onCloseModal={setAddModalOpen}
-          />
-        </Modal>
+        <AddNoteModal
+          isOpen={isAddModalOpen}
+          onRequestClose={setAddModalOpen}
+          user={user.email}
+          onSaveNote={addNote}
+          onCloseModal={setAddModalOpen}
+        />
         <Modal
           isOpen={isEditModalOpen}
           onRequestClose={setSelectedEditModalOpen}
         >
-          <NoteEdit
+          <EditNoteModal
             onSaveNote={editNote}
             onCloseModal={setSelectedEditModalOpen}
             note={selectedNote}
