@@ -9,25 +9,15 @@ import NoteEdit from "./NoteEdit";
 import NoteList from "./NoteList";
 import { NoteService } from "../../store/actions/NoteService";
 
-const NoteManager = props => {
+import useLoadNotes from "../../hooks/LoadNotesHook";
+
+const Notes = props => {
   const { isAuthenticated, user } = props.auth;
 
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useLoadNotes([]);
   const [selectedNote, setSelectedNote] = useState(null);
   const [isAddNoteModalOpen, setAddNoteModalOpen] = useState(false);
   const [isEditNoteModalOpen, setEditNoteModalOpen] = useState(false);
-
-  useEffect(() => {
-    NoteService.listNotes()
-      .then(notes => {
-        setNotes(notes);
-        return;
-      })
-      .catch(error => {
-        console.log(error);
-        return;
-      });
-  }, [props]);
 
   const handleDeleteNote = noteId => {
     const confirmation = window.confirm(
@@ -180,4 +170,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(withStyles(NotesStyles)(NoteManager));
+export default connect(mapStateToProps)(withStyles(NotesStyles)(Notes));

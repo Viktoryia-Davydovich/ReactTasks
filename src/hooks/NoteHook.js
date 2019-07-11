@@ -5,7 +5,6 @@ const useForm = (obj = {}) => {
 
   const handleChange = useCallback(event => {
     event.persist();
-    console.log(event);
     event.target.type === "checkbox"
       ? setValues(values => ({ ...values, tag: event.target.checked }))
       : setValues(values => ({
