@@ -1,12 +1,11 @@
 import React from "react";
-import Modal from "react-modal";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import useForm from "../../hooks/NoteAddEditHook";
 
 const EditNoteModal = props => {
-  const { note, onSaveNote, onCloseModal } = props;
+  const { note, onSaveNote, onCloseModal, isOpen } = props;
   const [values, handleChange] = useForm(note);
 
   const onSave = event => {
