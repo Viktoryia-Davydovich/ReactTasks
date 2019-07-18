@@ -1,6 +1,4 @@
 import React from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Modal from "react-modal";
 
 import useForm from "../../hooks/NoteAddEditHook";
@@ -49,16 +47,14 @@ const AddNoteModal = props => {
             ></textarea>
           </div>
           <div className="form-group">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={values.tag}
-                  onChange={handleChange}
-                  value="private"
-                />
-              }
-              label="Private"
-            />
+            <label htmlFor="tag">Private </label>
+            <input
+              type="checkbox"
+              name="tag"
+              checked={values.tag}
+              onChange={handleChange}
+              value="private"
+            ></input>
           </div>
           <div className="form-group row">
             <div className="col-sm-4 col-md-3 col-xl-2 ml-auto">
