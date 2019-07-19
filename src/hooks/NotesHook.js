@@ -99,6 +99,7 @@ const useNotes = () => {
     isAddModalOpen,
     setAddModalOpen,
     isEditModalOpen,
+    setEditModalOpen,
     setSelectedEditModalOpen
   };
 };

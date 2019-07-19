@@ -22,6 +22,7 @@ const Notes = props => {
     isAddModalOpen,
     setAddModalOpen,
     isEditModalOpen,
+    setEditModalOpen,
     setSelectedEditModalOpen
   } = useNotes();
 
@@ -35,13 +36,10 @@ const Notes = props => {
           onSaveNote={addNote}
           onCloseModal={setAddModalOpen}
         />
-        <Modal
-          isOpen={isEditModalOpen}
-          onRequestClose={setSelectedEditModalOpen}
-        >
+        <Modal isOpen={isEditModalOpen} onRequestClose={setEditModalOpen}>
           <EditNoteModal
             onSaveNote={editNote}
-            onCloseModal={setSelectedEditModalOpen}
+            onCloseModal={setEditModalOpen}
             note={selectedNote}
           />
         </Modal>
